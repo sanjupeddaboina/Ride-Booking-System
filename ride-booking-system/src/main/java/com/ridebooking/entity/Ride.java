@@ -1,6 +1,7 @@
 package com.ridebooking.entity;
 
 import com.ridebooking.enums.RideStatus;
+import com.ridebooking.enums.VehicleType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,23 +19,21 @@ public class Ride {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String pickupAddress;
-
     private String dropAddress;
-
     private Double distance;
-
     private Double fare;
 
     @Enumerated(EnumType.STRING)
     private RideStatus status;
 
     private LocalDateTime bookedAt;
-
+    private LocalDateTime acceptedAt;
     private LocalDateTime startedAt;
-
     private LocalDateTime completedAt;
+
+    @Enumerated(EnumType.STRING)
+    private VehicleType vehicleType;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

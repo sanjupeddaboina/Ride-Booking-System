@@ -1,6 +1,7 @@
 package com.ridebooking.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,14 +19,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String phoneNumber;
 
+    @Column(nullable = false)
     private String password;
 
     private LocalDateTime createdAt;

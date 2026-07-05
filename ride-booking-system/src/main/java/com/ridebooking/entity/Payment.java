@@ -3,6 +3,8 @@ package com.ridebooking.entity;
 import com.ridebooking.enums.PaymentMethod;
 import com.ridebooking.enums.PaymentStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -19,7 +21,6 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Double amount;
 
     @Enumerated(EnumType.STRING)

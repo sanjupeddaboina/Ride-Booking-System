@@ -1,18 +1,25 @@
 package com.ridebooking.dto.response;
 
+import com.ridebooking.enums.VehicleType;
 import lombok.*;
 
-@Getter
-@Setter
+import java.time.LocalDateTime;
+
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class RideResponse {
 
     private Long rideId;
+    private Long userId;
+    private Long driverId;
     private String pickupAddress;
     private String dropAddress;
+    private VehicleType vehicleType;
+    private Double fare;
     private String status;
-    private Long driverId;
-    private Long userId;
+    private LocalDateTime bookedAt;
+    private LocalDateTime startedAt;
+    private LocalDateTime completedAt;
 }

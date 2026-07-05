@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class DriverAvailabilityRequest {
-
     private Long driverId;
     private Boolean available;
 }
