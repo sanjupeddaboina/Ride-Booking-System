@@ -1,34 +1,34 @@
 # 🚖 Ride Booking System
 
-## Introduction
+## 📖 Introduction
 
-Ride Booking System is a backend REST API application developed using **Spring Boot** that simulates the core functionalities of modern ride-booking platforms like Uber and Ola. The system allows users to register, log in, book rides, view ride history, cancel rides, and enables drivers to manage ride requests. The project follows a **Monolithic Architecture** with layered design principles and RESTful APIs.
+The **Ride Booking System** is a backend REST API application developed using **Spring Boot** that simulates the core functionalities of ride-booking platforms like **Uber** and **Ola**. The application allows users to register, log in, book rides, while enabling drivers to accept, start, and complete rides. It also includes automatic fare calculation, payment processing, ride history, and driver earnings management.
 
-The project is designed as a **fresher-level backend project** while following industry-standard development practices such as layered architecture, DTO pattern, exception handling, validation, and business rules.
-
----
-
-# Technologies and Dependencies
-
-- **Java 17** - Programming Language
-- **Spring Boot** - Backend Framework
-- **Spring Web** - REST API Development
-- **Spring Data JPA (Hibernate)** - ORM Framework
-- **MySQL** - Relational Database
-- **Maven** - Dependency Management
-- **Lombok** - Reduces Boilerplate Code
-- **Bean Validation** - Request Validation
-- **REST APIs** - Communication between Client and Server
-- **Git & GitHub** - Version Control
-- **Postman** - API Testing
+The project is developed as a **fresher-level backend project** by following industry-standard practices such as **Layered Architecture, RESTful APIs, DTO Pattern, Validation, Exception Handling, and Business Logic Implementation**.
 
 ---
 
-# Project Architecture
+# 🛠️ Technologies Used
 
-The application follows **Monolithic Architecture** with a layered structure.
+* Java 17
+* Spring Boot
+* Spring Web
+* Spring Data JPA (Hibernate)
+* MySQL
+* Maven
+* Lombok
+* Bean Validation (Jakarta Validation)
+* REST APIs
+* Postman
+* Git & GitHub
 
-```
+---
+
+# 🏗️ Project Architecture
+
+The application follows a **Monolithic Layered Architecture**.
+
+```text
 Controller Layer
         │
         ▼
@@ -43,52 +43,46 @@ MySQL Database
 
 ---
 
-# Project Structure
+# 📂 Project Structure
 
-```
+```text
 Ride-Booking-System
 │
 ├── controller
 ├── service
-│      ├── impl
+│     └── impl
 ├── repository
 ├── entity
 ├── dto
-│      ├── request
-│      ├── response
+│     ├── request
+│     └── response
 ├── enums
 ├── exception
-├── config
-├── util
-└── resources
+├── mapper
+├── resources
+└── RideBookingApplication
 ```
 
 ---
 
-# Using Ride Booking System
+# ⚙️ Prerequisites
 
-## Prerequisites
+Install the following before running the project:
 
-Before running the project, install:
-
-- Java 17
-- Maven 3.9+
-- MySQL 8+
-- Git
-- IntelliJ IDEA / Eclipse / VS Code
-- Postman
+* Java 17
+* Maven
+* MySQL 8+
+* Git
+* IntelliJ IDEA / Eclipse
+* Postman
 
 ---
 
-# Clone the Project
-
-Open Terminal / Git Bash
+# 📥 Clone the Repository
 
 ```bash
-git clone https://github.com/<your-github-username>/ride-booking-system.git
+git clone https://github.com/<sanjupeddaboina>/ride-booking-system.git
 ```
-
-Go inside the project
 
 ```bash
 cd ride-booking-system
@@ -96,7 +90,7 @@ cd ride-booking-system
 
 ---
 
-# Configure Database
+# 🗄️ Database Configuration
 
 Create a MySQL database.
 
@@ -104,13 +98,7 @@ Create a MySQL database.
 CREATE DATABASE ride_booking_db;
 ```
 
-Open
-
-```
-src/main/resources/application.properties
-```
-
-Update your database credentials.
+Update `application.properties`
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/ride_booking_db
@@ -124,251 +112,150 @@ spring.jpa.properties.hibernate.format_sql=true
 
 ---
 
-# Build the Project
+# ▶️ Run the Application
 
-Using Maven
+Build the project
 
 ```bash
 mvn clean install
 ```
 
----
-
-# Run the Application
-
-Using Maven
+Run the application
 
 ```bash
 mvn spring-boot:run
 ```
 
-OR
-
-Open the project in IntelliJ IDEA or Eclipse and run
+Or run
 
 ```
 RideBookingApplication.java
 ```
 
+from your IDE.
+
 ---
 
-# Verify the Application
+# 🗃️ Database Entities
 
-Once started successfully
+* User
+* Driver
+* Ride
+* Payment
+---
 
+# 📌 Modules & Features
+
+## 👤 User Module
+
+* User Registration
+* User Login
+* Book Ride
+* View Current Ride
+* View Ride History
+* Cancel Ride
+
+---
+
+## 🚗 Driver Module
+
+* Driver Registration
+* Driver Login
+* Update Availability
+* Accept Ride
+* Start Ride
+* Complete Ride
+* View Current Ride
+* View Total Earnings
+
+---
+
+## 🚕 Ride Module
+
+* Ride Booking
+* Automatic Driver Assignment
+* Ride Status Tracking
+* Distance-Based Fare Calculation
+* Ride History
+
+---
+
+## 💳 Payment Module
+
+* Make Payment
+
+---
+
+# 🔄 Ride Lifecycle
+
+```text
+BOOKED
+   │
+   ▼
+ACCEPTED
+   │
+   ▼
+STARTED
+   │
+   ▼
+COMPLETED
 ```
-http://localhost:8080
-```
 
----
+or
 
-# API Testing
-
-Use Postman to test all functionalities
-
-Recommended testing sequence
-
-1. Register User
-2. Login User
-3. Register Driver
-4. Login Driver
-5. Book Ride
-6. View Current Ride
-7. Cancel Ride
-8. Driver Accept Ride
-9. Start Ride
-10. Complete Ride
-11. Generate Payment
-12. Complete Payment
-
----
-
-# Backend Design
-
-## Entities
-
-The system contains the following entities.
-
----
-
-## User
-
-Represents customers who can book rides.
-
-Attributes
-
-- userId
-- fullName
-- email
-- phoneNumber
-- password
-- createdAt
-
----
-
-## Driver
-
-Represents drivers who accept ride requests.
-
-Attributes
-
-- driverId
-- fullName
-- email
-- phoneNumber
-- password
-- vehicleNumber
-- vehicleType
-- availability
-- totalEarnings
-
-Availability
-
----
-
-## Ride
-
-Represents a ride booked by a user.
-
-Attributes
-
-- rideId
-- pickupLocation
-- destination
-- vehicleType
-- fare
-- bookingTime
-- startTime
-- completionTime
-- rideStatus
-- user
-- driver
-
-Ride Status
-
-- REQUESTED
-- ACCEPTED
-- STARTED
-- COMPLETED
-- CANCELLED
-
----
-
-## Payment
-
-Represents payment for a completed ride.
-
-Attributes
-
-- paymentId
-- amount
-- paymentMethod
-- paymentStatus
-- paymentTime
-- ride
-
-Payment Method
-
-- CASH
-- UPI
-
-Payment Status
-
-- PENDING
-- SUCCESS
-- FAILED
-
----
-
-# Entity Relationships
-
-```
-User
- │
- │ One User
- │
- ▼
-Many Rides
- │
- │ Many Rides
- ▼
-One Driver
-
-Ride
- │
- │ One-to-One
- ▼
-Payment
+```text
+BOOKED
+   │
+   ▼
+CANCELLED
 ```
 
 ---
 
-# Functionalities Implemented
+# 🔗 Entity Relationships
 
-## User Module
+```text
+User (one)
+   │
+   │
+   ▼
+Ride (Many)
+   │
+   │ Many-to-One
+   ▼
+Driver (1)
 
-- User Registration
-- User Login
-- Book Ride
-- View Current Ride
-- View Ride History
-- Cancel Ride
-
----
-
-## Driver Module *(In Progress)*
-
-- Driver Registration
-- Driver Login
-- Driver Availability
-- Accept Ride
-- Reject Ride
-- Start Ride
-- Complete Ride
-- View Completed Rides
-- View Earnings
+Ride (1)
+   │
+   │ One-to-One
+   ▼
+Payment (1)
+```
 
 ---
 
-## Ride Module *(In Progress)*
+# ✨ Key Highlights
 
-- Automatic Driver Assignment
-- Ride Lifecycle Management
-- Ride Status Tracking
-- Fare Calculation
+* Layered Architecture
+* RESTful API Development
+* DTO Pattern
+* Spring Data JPA & Hibernate
+* Bean Validation
+* Global Exception Handling
+* Automatic Driver Assignment
+* Distance-Based Fare Calculation
+* Driver Earnings Tracking
+* Payment Management
+* Tested 30+ APIs using Postman
 
 ---
 
-## Payment Module *(In Progress)*
-
-- Generate Payment
-- Payment Processing
-- Payment Status Tracking
-
----
-
-# Future Enhancements
-
-- JWT Authentication
-- Role-Based Authorization
-- OTP Verification
-- Google Maps API Integration
-- Distance Calculation
-- Dynamic Fare Calculation
-- Ride Scheduling
-- Driver Ratings
-- User Ratings
-- Ride Notifications
-- Payment Integration Simulation
-- Live Ride Tracking
-- Admin Dashboard
-- Docker Deployment
----
-
-# Author
+# 👨‍💻 Author
 
 **Sanjay Kumar Peddaboina**
 
-# License
+---
 
-This project is developed for learning purposes and personal portfolio.
+# 📄 License
+
+This project is developed for **learning purposes**.
