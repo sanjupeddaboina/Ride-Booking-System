@@ -6,6 +6,17 @@ The **Ride Booking System** is a backend REST API application developed using **
 
 The project is developed as a **fresher-level backend project** by following industry-standard practices such as **Layered Architecture, RESTful APIs, DTO Pattern, Validation, Exception Handling, and Business Logic Implementation**.
 
+**Key Contributions:**
+
+1. Developed the complete ride lifecycle, including ride booking, automatic driver assignment, ride acceptance, trip start/completion, cancellation, payment processing, ride history, and driver earnings management.
+2. Designed relational database entities and implemented One-to-One, One-to-Many, and Many-to-One mappings using Spring Data JPA and Hibernate for Users, Drivers, Rides, and Payments.
+3. Implemented business validations to enforce real-world rules such as preventing multiple active rides, validating ride status transitions, and allowing payments only after ride completion.
+4. Built 30+ RESTful APIs for user, driver, ride, and payment management with proper HTTP methods, status codes, and JSON responses.
+5. Applied the DTO Pattern, Bean Validation, and Centralized Exception Handling (@ControllerAdvice) to improve API security, validation, and error handling.
+6. Implemented distance-based fare calculation and payment workflow to simulate real-world ride booking operations.
+7. Tested APIs extensively using Postman, validating CRUD operations, business workflows, input validation, and edge cases.
+8. Used Git version control and followed modular development practices to support collaborative development and future feature enhancements.
+
 ---
 
 # 🛠️ Technologies Used
