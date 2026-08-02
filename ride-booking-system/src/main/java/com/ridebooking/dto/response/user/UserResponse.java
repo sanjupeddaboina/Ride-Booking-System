@@ -1,4 +1,4 @@
-package com.ridebooking.dto.response;
+package com.ridebooking.dto.response.user;
 
 import lombok.*;
 import java.time.LocalDateTime;

@@ -1,23 +1,25 @@
 package com.ridebooking.controller;
 
-import com.ridebooking.dto.request.*;
-import com.ridebooking.dto.response.DriverResponse;
-import com.ridebooking.dto.response.RideResponse;
+import com.ridebooking.dto.request.driver.DriverAvailabilityRequest;
+import com.ridebooking.dto.request.driver.DriverLoginRequest;
+import com.ridebooking.dto.request.driver.DriverRegistrationRequest;
+import com.ridebooking.dto.response.driver.DriverResponse;
+import com.ridebooking.dto.response.ride.RideResponse;
 import com.ridebooking.service.DriverService;
-import com.ridebooking.service.RideService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/drivers")
-@RequiredArgsConstructor
-
+@RequestMapping("/api/v1/drivers")
 public class DriverController {
+
     private final DriverService driverService;
-    private final RideService rideService;
+
+    public DriverController(DriverService driverService) {
+        this.driverService = driverService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<DriverResponse> registerDriver(@Valid @RequestBody DriverRegistrationRequest request) {
@@ -31,34 +33,36 @@ public class DriverController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{driverId}/availability")
-    public ResponseEntity<DriverResponse> driverAvailability(
+    @PutMapping("/{driverId}/status")
+    public ResponseEntity<DriverResponse> updateDriverStatus(
             @PathVariable Long driverId,
             @Valid @RequestBody DriverAvailabilityRequest request) {
 
-        DriverResponse response = driverService.driverAvailability(driverId, request);
-        return ResponseEntity.ok(response);
+        DriverResponse driverResponse  = driverService.updateDriverStatus(driverId, request);
+        return ResponseEntity.ok(driverResponse );
     }
 
     @GetMapping("/{driverId}/current")
-    public RideResponse getCurrentRide(@PathVariable Long driverId) {
-        return driverService.getCurrentRide(driverId);
+    public ResponseEntity<RideResponse> getCurrentRide(@PathVariable Long driverId) {
+        RideResponse rideResponse = driverService.getCurrentRide(driverId);
+        return ResponseEntity.ok(rideResponse);
+    }
+
+    @GetMapping("/{driverId}/pending")
+    public ResponseEntity<RideResponse> getPendingRide(@PathVariable Long driverId) {
+        RideResponse rideResponse = driverService.getPendingRide(driverId);
+        return ResponseEntity.ok(rideResponse);
     }
 
     @GetMapping("/{driverId}/earnings")
-    public Double getDriverEarnings(@PathVariable Long driverId) {
-        return driverService.getDriverEarnings(driverId);
+    public ResponseEntity<Double> getDriverEarnings(@PathVariable Long driverId) {
+        Double earnings =driverService.getDriverEarnings(driverId);
+        return ResponseEntity.ok(earnings);
     }
 
-    @PutMapping("/{rideId}/complete")
-    public ResponseEntity<RideResponse> completeRide(@PathVariable Long rideId, @Valid @RequestBody CompleteRideRequest request) {
-        RideResponse response = rideService.completeRide(request.getDriverId(), rideId);
-        return ResponseEntity.ok(response);
-    }
-
-    @PutMapping("/{rideId}/cancel")
-    public ResponseEntity<RideResponse> cancelRide(@PathVariable Long rideId, @Valid @RequestBody CancelRideRequest request) {
-        RideResponse response = rideService.cancelRide(request.getUserId(), rideId);
-        return ResponseEntity.ok(response);
+    @GetMapping("/{driverId}/rides")
+    public ResponseEntity<java.util.List<RideResponse>> getDriverRideHistory(@PathVariable Long driverId) {
+        java.util.List<RideResponse> rideHistory = driverService.getDriverRideHistory(driverId);
+        return ResponseEntity.ok(rideHistory);
     }
 }

@@ -1,16 +1,15 @@
-package com.ridebooking.dto.response;
+package com.ridebooking.dto.response.ride;
 
 import com.ridebooking.enums.VehicleType;
-import lombok.*;
-
 import java.time.LocalDateTime;
+import lombok.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RideResponse {
 
+public class RideResponse {
     private Long rideId;
     private Long userId;
     private Long driverId;

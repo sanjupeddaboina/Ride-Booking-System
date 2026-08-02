@@ -1,11 +1,8 @@
 package com.ridebooking.service.impl;
 
-import com.ridebooking.dto.request.AcceptRideRequest;
-import com.ridebooking.dto.request.BookingRideRequest;
-import com.ridebooking.dto.request.StartRequest;
-import com.ridebooking.dto.response.RideResponse;
+import com.ridebooking.dto.request.ride.BookingRideRequest;
+import com.ridebooking.dto.response.ride.RideResponse;
 import com.ridebooking.entity.Driver;
-import com.ridebooking.exception.AuthenticationException;
 import com.ridebooking.exception.BusinessException;
 import com.ridebooking.exception.ResourceNotFoundException;
 import com.ridebooking.repository.DriverRepository;
@@ -13,22 +10,20 @@ import com.ridebooking.repository.RideRepository;
 import com.ridebooking.repository.UserRepository;
 import com.ridebooking.service.FareCalculationService;
 import com.ridebooking.service.RideService;
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
+import jakarta.validation.Valid;
 import com.ridebooking.entity.Ride;
 import com.ridebooking.entity.User;
 import com.ridebooking.enums.RideStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.ridebooking.enums.DriverStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
 @Service
-@RequiredArgsConstructor
-@Transactional
-
+@Transactional(readOnly = true)
 public class RideServiceImpl implements RideService {
     private final RideRepository rideRepository;
     private final UserRepository userRepository;
@@ -36,9 +31,21 @@ public class RideServiceImpl implements RideService {
 
     private final FareCalculationService fareCalculationService;
 
+    public RideServiceImpl(
+            RideRepository rideRepository,
+            UserRepository userRepository,
+            DriverRepository driverRepository,
+            FareCalculationService fareCalculationService) {
+
+        this.rideRepository = rideRepository;
+        this.userRepository = userRepository;
+        this.driverRepository = driverRepository;
+        this.fareCalculationService = fareCalculationService;
+    }
+
     @Override
     @Transactional
-    public RideResponse bookRide(Long userId, BookingRideRequest request) {
+    public RideResponse bookRide(Long userId, @Valid BookingRideRequest request) {
 
         User user = getUser(userId);
         boolean activeRideExists = rideRepository.existsByUserIdAndStatusIn(
@@ -49,8 +56,10 @@ public class RideServiceImpl implements RideService {
             throw new BusinessException("You already have an active ride. Cannot book another ride at this time.");
         }
 
-        List<Driver> availableDrivers = driverRepository
-                .findByAvailableTrueAndVehicleType(request.getVehicleType());
+        List<Driver> availableDrivers =
+                driverRepository.findByStatusAndAvailableTrueAndVehicleType(
+                        DriverStatus.ONLINE,
+                        request.getVehicleType());
 
         if (availableDrivers.isEmpty()) {
             throw new ResourceNotFoundException("No available " + request.getVehicleType() + " driver found.");
@@ -58,6 +67,12 @@ public class RideServiceImpl implements RideService {
 
         Random random = new Random();
         Driver assignedDriver = availableDrivers.get(random.nextInt(availableDrivers.size()));
+
+        // Mark the driver unavailable the moment they're assigned, not only once they
+        // accept. Otherwise, a second booking made before this driver accepts could pick
+        // the same "available" driver and double-assign them.
+        assignedDriver.setAvailable(false);
+        driverRepository.save(assignedDriver);
 
         Ride ride = Ride.builder()
                 .pickupAddress(request.getPickupAddress())
@@ -76,44 +91,28 @@ public class RideServiceImpl implements RideService {
 
     @Override
     @Transactional
-    public RideResponse acceptRide(AcceptRideRequest request) {
+    public RideResponse acceptRide(Long driverId, Long rideId) {
 
-        Driver driver = driverRepository.findById(request.getDriverId())
-                .orElseThrow(() -> new ResourceNotFoundException("Driver not found"));
-
-        Ride ride = rideRepository.findById(request.getRideId())
-                .orElseThrow(() -> new ResourceNotFoundException("Ride not found"));
+        Driver driver = getDriver(driverId);
+        Ride ride = getRide(rideId);
 
         if (ride.getStatus() != RideStatus.BOOKED) {
             throw new BusinessException("Only booked rides can be accepted.");
         }
 
-        // Only the assigned driver can accept
-        if (!ride.getDriver().getId().equals(driver.getId())) {
+        // The driver was already chosen at booking time, so accepting just confirms it.
+        if (ride.getDriver() == null || !ride.getDriver().getId().equals(driver.getId())) {
             throw new BusinessException("This ride is assigned to another driver.");
-        }
-
-        if (!Boolean.TRUE.equals(driver.getAvailable())) {
-            throw new BusinessException("Driver is unavailable.");
-        }
-
-        boolean hasActiveRide = rideRepository.existsByDriverIdAndStatusIn(
-                driver.getId(),
-                List.of(RideStatus.ACCEPTED, RideStatus.STARTED));
-
-        if (hasActiveRide) {
-            throw new BusinessException("Driver already has an active ride.");
         }
 
         ride.setStatus(RideStatus.ACCEPTED);
         ride.setAcceptedAt(LocalDateTime.now());
-        driver.setAvailable(false);
-        driverRepository.save(driver);
         Ride updatedRide = rideRepository.save(ride);
         return mapToRideResponse(updatedRide);
     }
 
     @Override
+    @Transactional
     public RideResponse startRide(Long driverId, Long rideId) {
 
         Ride ride = getRide(rideId);
@@ -134,6 +133,7 @@ public class RideServiceImpl implements RideService {
         Ride updatedRide = rideRepository.save(ride);
         return mapToRideResponse(updatedRide);
     }
+
     @Override
     @Transactional
     public RideResponse completeRide(Long driverId, Long rideId) {
@@ -144,7 +144,7 @@ public class RideServiceImpl implements RideService {
         }
 
         if (!ride.getDriver().getId().equals(driverId)) {
-            throw new AuthenticationException("You are not authorized to complete this ride.");
+            throw new BusinessException("You are not authorized to complete this ride.");
         }
 
         if (ride.getStatus() != RideStatus.STARTED) {
@@ -165,9 +165,15 @@ public class RideServiceImpl implements RideService {
     }
 
     @Override
+    @Transactional
     public RideResponse cancelRide(Long userId, Long rideId) {
 
         Ride ride = getRide(rideId);
+
+        // A ride can only be cancelled by the rider who booked it.
+        if (!ride.getUser().getId().equals(userId)) {
+            throw new BusinessException("This ride does not belong to the given user.");
+        }
 
         if (ride.getStatus() != RideStatus.BOOKED) {
             throw new BusinessException("Ride cannot be cancelled because its current status is " + ride.getStatus());

@@ -1,17 +1,14 @@
 package com.ridebooking.service.impl;
 
-import com.ridebooking.dto.request.PaymentRequest;
-import com.ridebooking.dto.response.PaymentResponse;
-import com.ridebooking.entity.Driver;
-import com.ridebooking.enums.PaymentMethod;
+import com.ridebooking.dto.request.payement.PaymentRequest;
+import com.ridebooking.dto.response.payement.PaymentResponse;
 import com.ridebooking.enums.RideStatus;
 import com.ridebooking.exception.BusinessException;
 import com.ridebooking.exception.ResourceNotFoundException;
-import com.ridebooking.repository.DriverRepository;
 import com.ridebooking.service.PaymentService;
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ridebooking.entity.Payment;
 import com.ridebooking.entity.Ride;
@@ -21,19 +18,24 @@ import com.ridebooking.repository.RideRepository;
 
 import java.time.LocalDateTime;
 @Service
-@RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final RideRepository rideRepository;
-    private final DriverRepository driverRepository;
+
+    public PaymentServiceImpl(
+            PaymentRepository paymentRepository,
+            RideRepository rideRepository) {
+
+        this.paymentRepository = paymentRepository;
+        this.rideRepository = rideRepository;
+    }
 
     @Override
     @Transactional
-    public PaymentResponse makePayment(PaymentRequest request) {
+    public PaymentResponse makePayment(@Valid PaymentRequest request) {
 
-        Ride ride = rideRepository.findById(request.getRideId())
-                .orElseThrow(() -> new ResourceNotFoundException("Ride not found"));
+        Ride ride = getRideById(request.getRideId());
 
         if (ride.getStatus() != RideStatus.COMPLETED) {
             throw new BusinessException("Payment can only be made for completed rides.");
@@ -50,11 +52,19 @@ public class PaymentServiceImpl implements PaymentService {
                 .amount(request.getAmount())
                 .paymentMethod(request.getPaymentMethod())
                 .paymentStatus(PaymentStatus.SUCCESS)
-                .paidAt(LocalDateTime.now())
                 .ride(ride)
                 .build();
+
         Payment savedPayment = paymentRepository.save(payment);
+
         return mapToPaymentResponse(savedPayment);
+    }
+
+    @Transactional
+    public Ride getRideById(Long RideId) {
+        return rideRepository.findById(RideId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Ride not found with id: " + RideId));
     }
 
     @Override
@@ -66,10 +76,12 @@ public class PaymentServiceImpl implements PaymentService {
     private PaymentResponse mapToPaymentResponse(Payment payment) {
 
         return PaymentResponse.builder()
-                .paymentId(payment.getId())
+                .id(payment.getId())
                 .rideId(payment.getRide().getId())
                 .amount(payment.getAmount())
-                .status(payment.getPaymentStatus().name())
+                .paymentMethod(payment.getPaymentMethod())
+                .paymentStatus(payment.getPaymentStatus())
+                .paymentTime(payment.getPaymentTime())
                 .build();
     }
 }

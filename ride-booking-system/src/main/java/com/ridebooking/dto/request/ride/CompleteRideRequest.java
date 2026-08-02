@@ -1,6 +1,5 @@
-package com.ridebooking.dto.request;
+package com.ridebooking.dto.request.ride;
 
-import com.ridebooking.entity.Ride;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

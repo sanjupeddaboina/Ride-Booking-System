@@ -1,22 +1,14 @@
 package com.ridebooking.service;
 
-import com.ridebooking.dto.request.AcceptRideRequest;
-import com.ridebooking.dto.request.BookingRideRequest;
-import com.ridebooking.dto.request.CompleteRideRequest;
-import com.ridebooking.dto.request.StartRequest;
-import com.ridebooking.dto.response.RideResponse;
+import com.ridebooking.dto.request.ride.BookingRideRequest;
+import com.ridebooking.dto.response.ride.RideResponse;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
-
-@Service
 public interface RideService {
-    public RideResponse bookRide(Long userId, BookingRideRequest request);
-    RideResponse acceptRide(AcceptRideRequest request);
+    RideResponse bookRide(Long userId, @Valid BookingRideRequest request);
+    RideResponse acceptRide(Long driverId, Long rideId);
     RideResponse cancelRide(Long userId, Long rideId);
-    RideResponse completeRide(Long rideId, Long driverId);
+    RideResponse completeRide(Long driverId, Long rideId);
     RideResponse startRide(Long driverId, Long rideId);
 }

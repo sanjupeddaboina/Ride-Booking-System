@@ -1,6 +1,6 @@
-package com.ridebooking.dto.request;
-import com.ridebooking.enums.PaymentMethod;
+package com.ridebooking.dto.request.payement;
 
+import com.ridebooking.enums.PaymentMethod;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
