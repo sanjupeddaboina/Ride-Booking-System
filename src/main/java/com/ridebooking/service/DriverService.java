@@ -3,6 +3,7 @@ package com.ridebooking.service;
 import com.ridebooking.dto.request.driver.DriverAvailabilityRequest;
 import com.ridebooking.dto.request.driver.DriverLoginRequest;
 import com.ridebooking.dto.request.driver.DriverRegistrationRequest;
+import com.ridebooking.dto.response.auth.AuthResponse;
 import com.ridebooking.dto.response.driver.DriverResponse;
 import com.ridebooking.dto.response.ride.RideResponse;
 import jakarta.validation.Valid;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public interface DriverService {
     DriverResponse registerDriver(DriverRegistrationRequest request);
-    DriverResponse loginDriver(DriverLoginRequest request);
+    AuthResponse loginDriver(DriverLoginRequest request);
     DriverResponse updateDriverStatus(Long driverId, DriverAvailabilityRequest request);
     RideResponse getCurrentRide(Long driverId);
 

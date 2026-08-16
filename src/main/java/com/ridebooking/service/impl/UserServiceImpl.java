@@ -2,17 +2,21 @@ package com.ridebooking.service.impl;
 
 import com.ridebooking.dto.request.user.UserLoginRequest;
 import com.ridebooking.dto.request.user.UserRegistrationRequest;
+import com.ridebooking.dto.response.auth.AuthResponse;
 import com.ridebooking.dto.response.ride.RideResponse;
 import com.ridebooking.dto.response.user.UserResponse;
 import com.ridebooking.entity.Ride;
 import com.ridebooking.enums.RideStatus;
-import com.ridebooking.exception.AuthenticationException;
 import com.ridebooking.exception.BusinessException;
 import com.ridebooking.exception.ResourceNotFoundException;
 import com.ridebooking.repository.RideRepository;
 import com.ridebooking.repository.UserRepository;
+import com.ridebooking.security.JwtService;
 import com.ridebooking.service.UserService;
-import org.springframework.transaction.annotation.Transactional;import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.ridebooking.entity.User;
@@ -23,13 +27,24 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-    private final RideRepository rideRepository;
+    private UserRepository userRepository;
+    private RideRepository rideRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
+
 
     public UserServiceImpl(UserRepository userRepository,
-                           RideRepository rideRepository) {
+                           RideRepository rideRepository,
+                           PasswordEncoder passwordEncoder,
+                           AuthenticationManager authenticationManager,
+                           JwtService jwtService) {
+
         this.userRepository = userRepository;
         this.rideRepository = rideRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.jwtService = jwtService;
     }
 
     @Override
@@ -46,7 +61,7 @@ public class UserServiceImpl implements UserService {
         User user = User.builder()
                 .name(request.getName())
                 .email(request.getEmail())
-                .password(request.getPassword())   // Encode later using BCrypt
+                .password(passwordEncoder.encode(request.getPassword()))   // Encode later using BCrypt
                 .phoneNumber(request.getPhoneNumber())
                 .createdAt(LocalDateTime.now())
                 .build();
@@ -57,17 +72,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public UserResponse loginUser(UserLoginRequest request) {
+    public AuthResponse loginUser(UserLoginRequest request) {
 
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new AuthenticationException("User not found"));
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()));
 
-        if (!user.getPassword().equals(request.getPassword())) {
-            throw new AuthenticationException("Invalid email or password");
-        }
+        String token = jwtService.generateToken(
+                request.getEmail(),
+                "USER");
 
-        return mapToUserResponse(user);
+        return new AuthResponse(token, "USER");
     }
 
     @Override
@@ -77,6 +93,30 @@ public class UserServiceImpl implements UserService {
         User user = getUserById(userId);
 
         return mapToUserResponse(user);
+    }
+
+    @Override
+    public RideResponse bookRide(RideResponse rideRequest) {
+        User user = getUserById(rideRequest.getUserId());
+
+        boolean activeRideExists = rideRepository.existsByUserIdAndStatusIn(
+                user.getId(),
+                List.of(RideStatus.BOOKED, RideStatus.ACCEPTED, RideStatus.STARTED));
+
+        if (activeRideExists) {
+            throw new BusinessException("You already have an active ride. Cannot book another ride at this time.");
+        }
+
+        Ride ride = Ride.builder()
+                .user(user)
+                .pickupAddress(rideRequest.getPickupAddress())
+                .dropAddress(rideRequest.getDropAddress())
+                .status(RideStatus.BOOKED)
+                .build();
+
+        Ride savedRide = rideRepository.save(ride);
+
+        return mapToRideResponse(savedRide);
     }
 
     @Override
@@ -119,8 +159,7 @@ public class UserServiceImpl implements UserService {
     private User getUserById(Long userId) {
 
         return userRepository.findById(userId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                                 "User not found with id: " + userId));
     }
 

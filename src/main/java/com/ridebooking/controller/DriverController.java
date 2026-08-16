@@ -3,6 +3,7 @@ package com.ridebooking.controller;
 import com.ridebooking.dto.request.driver.DriverAvailabilityRequest;
 import com.ridebooking.dto.request.driver.DriverLoginRequest;
 import com.ridebooking.dto.request.driver.DriverRegistrationRequest;
+import com.ridebooking.dto.response.auth.AuthResponse;
 import com.ridebooking.dto.response.driver.DriverResponse;
 import com.ridebooking.dto.response.ride.RideResponse;
 import com.ridebooking.service.DriverService;
@@ -28,8 +29,8 @@ public class DriverController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<DriverResponse> loginDriver(@Valid @RequestBody DriverLoginRequest request) {
-        DriverResponse response = driverService.loginDriver(request);
+    public ResponseEntity<AuthResponse> loginDriver(@Valid @RequestBody DriverLoginRequest request) {
+        AuthResponse response = driverService.loginDriver(request);
         return ResponseEntity.ok(response);
     }
 

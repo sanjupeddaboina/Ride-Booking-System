@@ -35,11 +35,10 @@ public class Payment {
     private PaymentStatus paymentStatus;
 
     @CreationTimestamp
-    @Column(nullable = false, updatable = false)
+    @Column(name = "paid_at", nullable = false, updatable = false)
     private LocalDateTime paymentTime;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ride_id", nullable = false, unique = true)
     private Ride ride;
-
 }

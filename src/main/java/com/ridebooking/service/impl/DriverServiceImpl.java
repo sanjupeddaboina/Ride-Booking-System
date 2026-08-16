@@ -3,17 +3,21 @@ package com.ridebooking.service.impl;
 import com.ridebooking.dto.request.driver.DriverAvailabilityRequest;
 import com.ridebooking.dto.request.driver.DriverLoginRequest;
 import com.ridebooking.dto.request.driver.DriverRegistrationRequest;
+import com.ridebooking.dto.response.auth.AuthResponse;
 import com.ridebooking.dto.response.driver.DriverResponse;
 import com.ridebooking.dto.response.ride.RideResponse;
 import com.ridebooking.entity.Ride;
 import com.ridebooking.enums.DriverStatus;
 import com.ridebooking.enums.RideStatus;
-import com.ridebooking.exception.AuthenticationException;
 import com.ridebooking.exception.BusinessException;
 import com.ridebooking.exception.ResourceNotFoundException;
 import com.ridebooking.repository.DriverRepository;
 import com.ridebooking.repository.RideRepository;
+import com.ridebooking.security.JwtService;
 import com.ridebooking.service.DriverService;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import com.ridebooking.entity.Driver;
@@ -25,10 +29,20 @@ public class DriverServiceImpl implements DriverService {
 
     private final DriverRepository driverRepository;
     private final RideRepository rideRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
 
-    public DriverServiceImpl(DriverRepository driverRepository,RideRepository rideRepository){
+    public DriverServiceImpl(DriverRepository driverRepository,
+                             RideRepository rideRepository,
+                             PasswordEncoder passwordEncoder,
+                             AuthenticationManager authenticationManager,
+                             JwtService jwtService) {
         this.driverRepository = driverRepository;
         this.rideRepository = rideRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.jwtService = jwtService;
     }
 
     @Override
@@ -49,7 +63,7 @@ public class DriverServiceImpl implements DriverService {
         Driver driver = Driver.builder()
                 .name(request.getName())
                 .email(request.getEmail())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword())) // Encode later using BCrypt
                 .phoneNumber(request.getPhoneNumber())
                 .vehicleNumber(request.getVehicleNumber())
                 .vehicleType(request.getVehicleType())
@@ -64,19 +78,18 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public DriverResponse loginDriver(DriverLoginRequest request) {
-        // Both "no such email" and "wrong password" now return the same 401
-        // Unauthorized via AuthenticationException, matching UserServiceImpl and
-        // avoiding leaking which part of the credentials was wrong.
-        Driver driver = driverRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new AuthenticationException("Invalid email or password."));
+    public AuthResponse loginDriver(DriverLoginRequest request) {
 
-        if (!driver.getPassword().equals(request.getPassword())) {
-            throw new AuthenticationException("Invalid email or password.");
-        }
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()));
 
-        return mapToDriverResponse(driver);
+        String token = jwtService.generateToken(
+                request.getEmail(),
+                "DRIVER");
+
+        return new AuthResponse(token, "DRIVER");
     }
 
     @Override
