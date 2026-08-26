@@ -14,8 +14,9 @@ The project is built using Layered Architecture and follows industry-standard ba
 5. Developed 30+ RESTful APIs for user, driver, ride, and payment management using appropriate HTTP methods, status codes, and consistent JSON responses.
 6. Applied the DTO Pattern, Bean Validation, and Global Exception Handling (@ControllerAdvice) to improve API validation, maintainability, and error handling.
 7. Implemented distance-based fare calculation, driver earnings calculation, and a simulated payment workflow to replicate real-world ride booking operations.
-8. Tested all APIs using Postman, covering CRUD operations, complete ride workflows, input validation, exception handling, and edge-case scenarios.
-9. Used Git for version control and followed modular, maintainable coding practices to support scalability and future enhancements.
+8. Implemented Spring Security with BCrypt password encryption, JWT-based Authentication, Role-Based Access Control (RBAC), Security Filter Chain, and secure API authorization.
+9. Tested all APIs using Postman, covering CRUD operations, complete ride workflows, input validation, exception handling, and edge-case scenarios.
+10. Used Git for version control and followed modular, maintainable coding practices to support scalability and future enhancements.
 
 ---
 
@@ -154,6 +155,7 @@ src
 - Spring Data JPA
 - Hibernate
 - Maven
+- Spring Security
 
 ## Database
 
