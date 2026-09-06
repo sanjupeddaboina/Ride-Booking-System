@@ -28,7 +28,6 @@ public class RideServiceImpl implements RideService {
     private final RideRepository rideRepository;
     private final UserRepository userRepository;
     private final DriverRepository driverRepository;
-
     private final FareCalculationService fareCalculationService;
 
     public RideServiceImpl(
@@ -74,11 +73,16 @@ public class RideServiceImpl implements RideService {
         assignedDriver.setAvailable(false);
         driverRepository.save(assignedDriver);
 
+        Double fare = fareCalculationService.calculateFare(
+                request.getVehicleType(),
+                request.getDistance());
+
         Ride ride = Ride.builder()
                 .pickupAddress(request.getPickupAddress())
                 .dropAddress(request.getDropAddress())
                 .distance(request.getDistance())
                 .vehicleType(request.getVehicleType())
+                .fare(fare)
                 .status(RideStatus.BOOKED)
                 .bookedAt(LocalDateTime.now())
                 .driver(assignedDriver)

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RideFlow | Dashboard</title>
+
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/user.css">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- ================= DESKTOP SIDEBAR ================= -->
+    <aside class="side-nav">
+
+        <a href="../../index.html" class="side-nav-brand">
+            <span class="brand-icon">🚕</span>
+            <span>RideFlow</span>
+        </a>
+
+        <span class="side-nav-label">RIDE</span>
+
+        <div class="side-nav-links">
+            <button class="side-nav-item side-nav-book active" data-page="home" type="button">
+                <span class="side-nav-icon">🚕</span>
+                <span>Book a Ride</span>
+            </button>
+
+            <div class="side-nav-divider"></div>
+
+            <button class="side-nav-item" data-page="home" type="button">
+                <span class="side-nav-icon">🏠</span>
+                <span>Dashboard</span>
+            </button>
+
+            <button class="side-nav-item" data-page="ride-history" type="button">
+                <span class="side-nav-icon">🧾</span>
+                <span>Activity</span>
+            </button>
+
+            <button class="side-nav-item" data-page="profile" type="button">
+                <span class="side-nav-icon">👤</span>
+                <span>Profile</span>
+            </button>
+        </div>
+
+        <div class="side-nav-user">
+            <div class="side-nav-user-avatar" id="sideNavUserInitial">U</div>
+            <div class="side-nav-user-info">
+                <span>Signed in as</span>
+                <strong id="sideNavUserName">User</strong>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="app-header">
+
+        <a href="../../index.html" class="app-brand">
+            <span class="brand-icon">🚕</span>
+            <span>RideFlow</span>
+        </a>
+
+        <div class="header-profile">
+
+            <div class="profile-text">
+                <span class="profile-label">Welcome back</span>
+                <strong id="headerUserName">User</strong>
+            </div>
+
+            <div class="profile-avatar">
+                <span id="headerUserInitial">U</span>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main id="content" class="app-content">
+
+        <!-- Dynamic content will be rendered here -->
+
+    </main>
+
+
+    <!-- ================= BOTTOM NAVIGATION ================= -->
+
+    <nav class="bottom-nav">
+
+        <button class="bottom-nav-item active" data-page="home" type="button">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+        </button>
+
+        <button class="bottom-nav-item" data-page="ride-history" type="button">
+            <span class="nav-icon">🧾</span>
+            <span>Activity</span>
+        </button>
+
+        <button class="bottom-nav-item" data-page="profile" type="button">
+            <span class="nav-icon">👤</span>
+            <span>Profile</span>
+        </button>
+
+    </nav>
+
+</div>
+
+
+<!-- ================= CONFIG ================= -->
+
+<script src="../../js/config.js"></script>
+
+
+<!-- ================= UTILITIES ================= -->
+
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/auth-guard.js"></script>
+<script src="../../js/utils/ride-state.js"></script>
+<script src="../../js/utils/ui.js"></script>
+<script src="../../js/utils/driver-profile.js"></script>
+<script src="../../js/utils/route-map.js"></script>
+
+
+<!-- ================= API ================= -->
+
+<script src="../../js/api/api-client.js"></script>
+<script src="../../js/api/user-api.js"></script>
+<script src="../../js/api/ride-api.js"></script>
+<script src="../../js/api/payment-api.js"></script>
+
+
+<!-- ================= USER PAGES ================= -->
+
+<script src="../../js/user/home.js"></script>
+<script src="../../js/user/vehicle-selection.js"></script>
+<script src="../../js/user/confirm-ride.js"></script>
+<script src="../../js/user/current-ride.js"></script>
+<script src="../../js/user/ride-history.js"></script>
+<script src="../../js/user/payment.js"></script>
+<script src="../../js/user/profile.js"></script>
+
+
+<!-- ================= MAIN CONTROLLER ================= -->
+
+<script src="../../js/user/dashboard.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,538 @@
+/* =========================================
+   DASHBOARD LAYOUT
+========================================= */
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f7fb;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    width: 280px;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #172033;
+
+    padding: 28px 16px 20px;
+
+    color: white;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 8px 16px 35px;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    color: #ffffff;
+}
+
+.logo-icon {
+    font-size: 26px;
+    line-height: 1;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.nav-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 18px 20px;
+
+    border: none;
+    border-radius: 16px;
+
+    background: transparent;
+
+    color: #b6c0d1;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+.nav-item:hover {
+    background: #253147;
+    color: #ffffff;
+}
+
+
+.nav-item.active {
+    background: linear-gradient(
+        135deg,
+        #4b7bec,
+        #2f63c9
+    );
+
+    color: #ffffff;
+
+    box-shadow: 0 8px 20px rgba(47, 99, 201, 0.25);
+}
+
+
+.nav-item span {
+    width: 24px;
+
+    display: flex;
+    justify-content: center;
+
+    font-size: 19px;
+}
+
+
+/* =========================================
+   SIDEBAR BOTTOM
+========================================= */
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================
+   USER PROFILE
+========================================= */
+
+.profile-section {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 12px;
+
+    margin-bottom: 12px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+.sidebar-avatar {
+    width: 46px;
+    height: 46px;
+
+    min-width: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #4b7bec,
+        #2563eb
+    );
+
+    color: white;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+.sidebar-avatar span {
+    color: white;
+}
+
+
+/* User details */
+
+.sidebar-user-details {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    gap: 2px;
+}
+
+
+.sidebar-user-details strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.sidebar-user-details span {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+/* =========================================
+   LOGOUT BUTTON
+========================================= */
+
+.logout-btn {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 15px 20px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: #ef4444;
+
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+.logout-btn:hover {
+    background: #dc2626;
+
+    transform: translateY(-1px);
+}
+
+
+.logout-btn span {
+    font-size: 19px;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.main-content {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 32px 48px;
+
+    background: #f5f7fb;
+}
+
+
+.dashboard-header {
+    padding-bottom: 24px;
+    margin-bottom: 30px;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+
+.dashboard-header h1 {
+    font-size: 30px;
+    color: #172033;
+}
+
+
+.dashboard-label {
+    margin-bottom: 5px;
+
+    color: #64748b;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 230px;
+    }
+
+    .main-content {
+        padding: 25px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .sidebar-bottom {
+        margin-top: 20px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+}
+
+/* =========================================
+   SHARED DASHBOARD COMPONENTS
+   (used by both the user and driver areas)
+========================================= */
+
+.muted-note {
+    color: var(--text-light, #64748b);
+    font-size: 13px;
+}
+
+
+.content-card,
+.welcome-card {
+    background: var(--surface, #fff);
+    border: 1px solid var(--border, #e2e8f0);
+    border-radius: var(--radius-lg, 24px);
+    padding: 28px;
+    box-shadow: var(--shadow-sm, 0 4px 12px rgba(15, 23, 42, 0.06));
+}
+
+
+.welcome-card h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+
+.welcome-card p {
+    color: var(--text-light, #64748b);
+    max-width: 520px;
+}
+
+
+.home-shortcut-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+}
+
+
+.home-shortcut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    padding: 20px 14px;
+
+    border: 1px solid var(--border, #e2e8f0);
+    border-radius: 16px;
+    background: var(--background, #f8fafc);
+
+    font-size: 24px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+
+.home-shortcut span {
+    font-size: 13px;
+    color: var(--text, #1e293b);
+}
+
+
+.home-shortcut:hover {
+    border-color: var(--primary, #5b5ce2);
+    background: var(--primary-light, #eef0ff);
+}
+
+
+/* Status badges used on ride-history rows */
+
+.status-badge {
+    display: inline-block;
+    margin-top: 4px;
+
+    padding: 3px 10px;
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+
+.status-completed { background: #dcfce7; color: #15803d; }
+.status-booked { background: #fef9c3; color: #a16207; }
+.status-accepted { background: #dbeafe; color: #1d4ed8; }
+.status-started { background: #ede9fe; color: #6d28d9; }
+.status-cancelled { background: #fee2e2; color: #b91c1c; }
+
+
+/* History list (rendered on both the rider and driver history pages) */
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+
+.history-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 16px;
+
+    background: var(--surface, #fff);
+    border: 1px solid var(--border, #e2e8f0);
+    border-radius: 16px;
+}
+
+
+.history-card-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+    background: var(--primary-light, #eef0ff);
+
+    font-size: 20px;
+}
+
+
+.history-card-body {
+    flex: 1;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+.history-card-body strong {
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.history-card-fare {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+.ui-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 100px;
+    transform: translateX(-50%) translateY(20px);
+
+    padding: 12px 20px;
+    border-radius: 999px;
+
+    background: #111827;
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    opacity: 0;
+    pointer-events: none;
+
+    z-index: 5000;
+    transition: all 0.25s ease;
+}
+
+
+.ui-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+
+.ui-toast.error {
+    background: #b91c1c;
+}

@@ -15,5 +15,4 @@ public interface UserService {
     RideResponse getCurrentRide(Long userId);
     List<RideResponse> getRideHistory(Long userId);
     UserResponse getByUserId(Long userId);
-    RideResponse bookRide(@Valid RideResponse rideRequest);
 }

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Driver Dashboard | RideFlow</title>
+
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/driver.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            🚕 RideFlow
+        </div>
+
+        <nav class="nav-menu">
+
+            <button class="nav-item active" data-page="home" type="button">
+                🏠 Dashboard
+            </button>
+
+            <button class="nav-item" data-page="available-rides" type="button">
+                🚖 Available Rides
+            </button>
+
+            <button class="nav-item" data-page="current-ride" type="button">
+                📍 Current Ride
+            </button>
+
+            <button class="nav-item" data-page="ride-history" type="button">
+                📋 Ride History
+            </button>
+
+            <button class="nav-item" data-page="earnings" type="button">
+                💰 Earnings
+            </button>
+
+        </nav>
+
+        <button id="logoutBtn" class="logout-btn" type="button">
+            Logout
+        </button>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="dashboard-header">
+
+            <div>
+                <p class="dashboard-label">DRIVER PANEL</p>
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+            </div>
+
+            <div class="driver-info">
+
+                <span class="status-dot" id="driverStatusDot"></span>
+                <span id="driverStatusLabel">ONLINE</span>
+
+                <button id="statusToggleBtn" class="status-toggle-btn" type="button">
+                    Go Offline
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- Dynamic Content -->
+        <section id="content">
+
+            <!-- Content loaded dynamically -->
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- Foundation -->
+<script src="../../js/config.js"></script>
+<script src="../../js/utils/storage.js"></script>
+<script src="../../js/utils/auth-guard.js"></script>
+<script src="../../js/utils/ui.js"></script>
+<script src="../../js/utils/driver-profile.js"></script>
+<script src="../../js/utils/route-map.js"></script>
+
+<!-- API -->
+<script src="../../js/api/api-client.js"></script>
+<script src="../../js/api/driver-api.js"></script>
+<script src="../../js/api/ride-api.js"></script>
+
+<!-- Driver Pages -->
+<script src="../../js/driver/available-rides.js"></script>
+<script src="../../js/driver/current-ride.js"></script>
+<script src="../../js/driver/ride-history.js"></script>
+<script src="../../js/driver/earnings.js"></script>
+
+<!-- Driver Logic -->
+<script src="../../js/driver/dashboard.js"></script>
+
+<!-- Logout -->
+<script src="../../js/auth/driver/driver-logout.js"></script>
+
+</body>
+</html>

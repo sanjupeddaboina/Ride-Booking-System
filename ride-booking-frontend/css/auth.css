@@ -1,0 +1,453 @@
+/* ===============================
+   AUTH PAGE LAYOUT
+================================ */
+
+.auth-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #ffffff;
+}
+
+
+/* ===============================
+   LEFT BRAND SECTION
+================================ */
+
+.auth-brand-section {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding: 42px 10%;
+
+    background:
+        radial-gradient(
+            circle at 70% 35%,
+            rgba(182, 245, 0, 0.18),
+            transparent 35%
+        ),
+        #0b0b0b;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    width: fit-content;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.auth-brand span {
+    font-size: 28px;
+}
+
+.auth-brand-content {
+    margin: auto 0;
+    max-width: 520px;
+}
+
+.auth-tag,
+.form-tag {
+    display: inline-block;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.auth-tag {
+    color: #b6f500;
+    margin-bottom: 22px;
+}
+
+.auth-brand-content h1 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: clamp(48px, 5vw, 72px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 25px;
+}
+
+.auth-brand-content h1 span {
+    color: #b6f500;
+}
+
+.auth-brand-content > p {
+    color: #b3b3b3;
+
+    font-size: 17px;
+    line-height: 1.7;
+
+    margin-bottom: 45px;
+}
+
+
+/* ===============================
+   FEATURES
+================================ */
+
+.auth-features {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.auth-feature {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    color: #d6d6d6;
+}
+
+.auth-feature span {
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    background: #202020;
+
+    border-radius: 10px;
+
+    font-size: 18px;
+}
+
+.auth-feature p {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.auth-quote {
+    color: #777;
+
+    font-size: 13px;
+    font-style: italic;
+}
+
+
+/* ===============================
+   RIGHT FORM SECTION
+================================ */
+
+.auth-form-section {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+}
+
+.auth-form-wrapper {
+    width: 100%;
+    max-width: 440px;
+}
+
+.mobile-brand {
+    display: none;
+}
+
+.form-heading {
+    margin-bottom: 35px;
+}
+
+.form-tag {
+    color: #607d00;
+    margin-bottom: 14px;
+}
+
+.form-heading h2 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 38px;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 10px;
+}
+
+.form-heading p {
+    color: #777;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* ===============================
+   FORM
+================================ */
+
+.modern-auth-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.input-group input {
+    width: 100%;
+
+    padding: 15px 16px;
+
+    border: 1px solid #dedede;
+
+    border-radius: 11px;
+
+    outline: none;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+}
+
+.input-group input:focus {
+    border-color: #9bcf00;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(182, 245, 0, 0.18);
+}
+
+
+/* ===============================
+   SUBMIT BUTTON
+================================ */
+
+.auth-submit-btn {
+    width: 100%;
+
+    margin-top: 8px;
+
+    padding: 16px 18px;
+
+    border-radius: 12px;
+
+    background: #0b0b0b;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    transition: 0.25s;
+}
+
+.auth-submit-btn:hover {
+    background: #222;
+
+    transform: translateY(-2px);
+}
+
+
+/* ===============================
+   MESSAGE
+================================ */
+
+.auth-message {
+    min-height: 20px;
+
+    margin-top: 14px;
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+
+/* ===============================
+   DIVIDER
+================================ */
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 25px 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: #e5e5e5;
+}
+
+.auth-divider span {
+    color: #999;
+
+    font-size: 12px;
+}
+
+
+/* ===============================
+   SWITCH ACCOUNT
+================================ */
+
+.auth-switch {
+    text-align: center;
+
+    font-size: 14px;
+
+    color: #666;
+}
+
+.auth-switch a {
+    color: #000;
+
+    font-weight: 700;
+
+    margin-left: 4px;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+.auth-back {
+    text-align: center;
+
+    margin-top: 30px;
+}
+
+.auth-back a {
+    color: #777;
+
+    font-size: 13px;
+
+    transition: 0.2s;
+}
+
+.auth-back a:hover {
+    color: #000;
+}
+
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+    .auth-page {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-brand-section {
+        display: none;
+    }
+
+    .auth-form-section {
+        min-height: 100vh;
+    }
+
+    .mobile-brand {
+        display: block;
+
+        margin-bottom: 60px;
+
+        font-family: "Space Grotesk", sans-serif;
+
+        font-size: 25px;
+        font-weight: 700;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .auth-form-section {
+        padding: 25px;
+    }
+
+    .form-heading h2 {
+        font-size: 32px;
+    }
+
+    .mobile-brand {
+        margin-bottom: 40px;
+    }
+
+}
+
+/* Driver Registration */
+
+.input-group select {
+    width: 100%;
+    padding: 15px 16px;
+
+    border: 1px solid #dedede;
+    border-radius: 11px;
+
+    background: white;
+
+    outline: none;
+    font-size: 15px;
+}
+
+.input-group select:focus {
+    border-color: #9bcf00;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(182, 245, 0, 0.18);
+}
+
+.form-section-title {
+    margin-top: 8px;
+    margin-bottom: -5px;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    color: #607d00;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

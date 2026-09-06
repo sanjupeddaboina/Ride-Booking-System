@@ -10,6 +10,7 @@ import com.ridebooking.service.DriverService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,6 +35,7 @@ public class DriverController {
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasRole('DRIVER')")
     @PutMapping("/{driverId}/status")
     public ResponseEntity<DriverResponse> updateDriverStatus(
             @PathVariable Long driverId,
@@ -43,24 +45,28 @@ public class DriverController {
         return ResponseEntity.ok(driverResponse );
     }
 
+    @PreAuthorize("hasRole('DRIVER')")
     @GetMapping("/{driverId}/current")
     public ResponseEntity<RideResponse> getCurrentRide(@PathVariable Long driverId) {
         RideResponse rideResponse = driverService.getCurrentRide(driverId);
         return ResponseEntity.ok(rideResponse);
     }
 
+    @PreAuthorize("hasRole('DRIVER')")
     @GetMapping("/{driverId}/pending")
     public ResponseEntity<RideResponse> getPendingRide(@PathVariable Long driverId) {
         RideResponse rideResponse = driverService.getPendingRide(driverId);
         return ResponseEntity.ok(rideResponse);
     }
 
+    @PreAuthorize("hasRole('DRIVER')")
     @GetMapping("/{driverId}/earnings")
     public ResponseEntity<Double> getDriverEarnings(@PathVariable Long driverId) {
         Double earnings =driverService.getDriverEarnings(driverId);
         return ResponseEntity.ok(earnings);
     }
 
+    @PreAuthorize("hasRole('DRIVER')")
     @GetMapping("/{driverId}/rides")
     public ResponseEntity<java.util.List<RideResponse>> getDriverRideHistory(@PathVariable Long driverId) {
         java.util.List<RideResponse> rideHistory = driverService.getDriverRideHistory(driverId);

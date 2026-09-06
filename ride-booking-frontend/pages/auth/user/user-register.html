@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create User Account | RideFlow</title>
+
+    <link rel="stylesheet" href="../../../css/global.css">
+    <link rel="stylesheet" href="../../../css/auth.css">
+</head>
+
+<body>
+
+<div class="auth-page">
+
+    <!-- LEFT BRAND SECTION -->
+    <section class="auth-brand-section">
+
+        <a href="../../../index.html" class="auth-brand">
+            <span>🚕</span>
+            RideFlow
+        </a>
+
+        <div class="auth-brand-content">
+
+            <span class="auth-tag">
+                RIDE WITH RIDEFLOW
+            </span>
+
+            <h1>
+                Your next journey
+                <span>starts here.</span>
+            </h1>
+
+            <p>
+                Create your account and start booking rides quickly,
+                securely, and conveniently.
+            </p>
+
+            <div class="auth-features">
+
+                <div class="auth-feature">
+                    <span>⚡</span>
+                    <p>Book rides in seconds</p>
+                </div>
+
+                <div class="auth-feature">
+                    <span>📍</span>
+                    <p>Track your ride status</p>
+                </div>
+
+                <div class="auth-feature">
+                    <span>🔐</span>
+                    <p>Secure account access</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="auth-quote">
+            "Your destination is only one booking away."
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT FORM SECTION -->
+    <section class="auth-form-section">
+
+        <div class="auth-form-wrapper">
+
+            <a href="../../../index.html" class="mobile-brand">
+                🚕 RideFlow
+            </a>
+
+            <div class="form-heading">
+
+                <span class="form-tag">
+                    CREATE USER ACCOUNT
+                </span>
+
+                <h2>Let's get you moving.</h2>
+
+                <p>
+                    Create your account to start booking rides.
+                </p>
+
+            </div>
+
+
+            <form id="userRegisterForm" class="modern-auth-form">
+
+                <div class="input-group">
+
+                    <label for="name">Full name</label>
+
+                    <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your full name"
+                            required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="email">Email address</label>
+
+                    <input
+                            type="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="phoneNumber">Phone number</label>
+
+                    <input
+                            type="tel"
+                            id="phoneNumber"
+                            placeholder="Enter your phone number"
+                            required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="password">Password</label>
+
+                    <input
+                            type="password"
+                            id="password"
+                            placeholder="Create a strong password"
+                            required
+                    >
+
+                </div>
+
+
+                <button type="submit" class="auth-submit-btn">
+                    Create account
+                    <span>→</span>
+                </button>
+
+            </form>
+
+
+            <p id="message" class="auth-message"></p>
+
+
+            <div class="auth-divider">
+                <span>Already have an account?</span>
+            </div>
+
+
+            <p class="auth-switch">
+
+                Sign in to continue
+
+                <a href="user-login.html">
+                    Login
+                </a>
+
+            </p>
+
+
+            <div class="auth-back">
+                <a href="../../../index.html">
+                    ← Back to home
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- Foundation -->
+<script src="../../../js/config.js"></script>
+<script src="../../../js/utils/storage.js"></script>
+
+<!-- API -->
+<script src="../../../js/api/api-client.js"></script>
+<script src="../../../js/api/user-api.js"></script>
+
+<!-- Registration Logic -->
+<script src="../../../js/auth/user/user-register.js"></script>
+
+</body>
+</html>

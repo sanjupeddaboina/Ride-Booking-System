@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Become a Driver | RideFlow</title>
+
+    <link rel="stylesheet" href="../../../css/global.css">
+    <link rel="stylesheet" href="../../../css/auth.css">
+</head>
+
+<body>
+
+<div class="auth-page">
+
+    <!-- LEFT SIDE -->
+    <section class="auth-brand-section">
+
+        <a href="../../../index.html" class="auth-brand">
+            <span>🚕</span>
+            RideFlow
+        </a>
+
+        <div class="auth-brand-content">
+
+            <span class="auth-tag">
+                DRIVE WITH RIDEFLOW
+            </span>
+
+            <h1>
+                Drive more.
+                <span>Earn more.</span>
+            </h1>
+
+            <p>
+                Join RideFlow as a driver, accept rides,
+                manage your trips, and track your earnings.
+            </p>
+
+            <div class="auth-features">
+
+                <div class="auth-feature">
+                    <span>🚗</span>
+                    <p>Accept available rides</p>
+                </div>
+
+                <div class="auth-feature">
+                    <span>🛣️</span>
+                    <p>Manage active rides</p>
+                </div>
+
+                <div class="auth-feature">
+                    <span>💰</span>
+                    <p>Track your earnings</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="auth-quote">
+            "Turn every journey into an opportunity."
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+    <section class="auth-form-section">
+
+        <div class="auth-form-wrapper">
+
+            <a href="../../../index.html" class="mobile-brand">
+                🚕 RideFlow
+            </a>
+
+            <div class="form-heading">
+
+                <span class="form-tag">
+                    DRIVER REGISTRATION
+                </span>
+
+                <h2>Start driving with us.</h2>
+
+                <p>
+                    Create your driver account and register your vehicle.
+                </p>
+
+            </div>
+
+
+            <form id="driverRegisterForm" class="modern-auth-form">
+
+                <!-- Personal Information -->
+
+                <div class="form-section-title">
+                    Personal Information
+                </div>
+
+
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+
+                    <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your full name"
+                            required
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+
+                    <input
+                            type="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            required
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="phoneNumber">Phone Number</label>
+
+                    <input
+                            type="tel"
+                            id="phoneNumber"
+                            placeholder="Enter 10-digit mobile number"
+                            required
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+
+                    <input
+                            type="password"
+                            id="password"
+                            placeholder="Create a strong password"
+                            required
+                    >
+                </div>
+
+
+                <!-- Vehicle Information -->
+
+                <div class="form-section-title">
+                    Vehicle Information
+                </div>
+
+
+                <div class="input-group">
+                    <label for="vehicleType">Vehicle Type</label>
+
+                    <select id="vehicleType" required>
+                        <option value="">Select vehicle type</option>
+                        <option value="BIKE">Bike</option>
+                        <option value="AUTO">Auto</option>
+                        <option value="MINI">Mini</option>
+                        <option value="SEDAN">Sedan</option>
+                    </select>
+                </div>
+
+
+                <div class="input-group">
+                    <label for="vehicleNumber">Vehicle Number</label>
+
+                    <input
+                            type="text"
+                            id="vehicleNumber"
+                            placeholder="Example: TS09AB1234"
+                            required
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="licenseNumber">License Number</label>
+
+                    <input
+                            type="text"
+                            id="licenseNumber"
+                            placeholder="Enter your driving license number"
+                            required
+                    >
+                </div>
+
+
+                <button type="submit" class="auth-submit-btn">
+                    Create Driver Account
+                    <span>→</span>
+                </button>
+
+            </form>
+
+
+            <p id="message" class="auth-message"></p>
+
+
+            <div class="auth-divider">
+                <span>Already registered?</span>
+            </div>
+
+
+            <p class="auth-switch">
+                Already have a driver account?
+
+                <a href="driver-login.html">
+                    Login
+                </a>
+            </p>
+
+
+            <div class="auth-back">
+                <a href="../../../index.html">
+                    ← Back to home
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- Foundation -->
+<script src="../../../js/config.js"></script>
+<script src="../../../js/utils/storage.js"></script>
+
+<!-- API -->
+<script src="../../../js/api/api-client.js"></script>
+<script src="../../../js/api/driver-api.js"></script>
+
+<!-- Registration Logic -->
+<script src="../../../js/auth/driver/driver-register.js"></script>
+
+</body>
+</html>

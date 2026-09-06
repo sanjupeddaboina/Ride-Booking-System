@@ -1,0 +1,2792 @@
+/* =========================================
+   USER APP
+========================================= */
+
+.app-layout {
+    min-height: 100vh;
+    padding-bottom: 90px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.app-header {
+    height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    border-bottom: 1px solid #e9e9e9;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+}
+
+
+.app-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    text-decoration: none;
+
+    color: #111;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+
+    background: #111;
+}
+
+
+.header-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.profile-text {
+    display: flex;
+    flex-direction: column;
+
+    text-align: right;
+}
+
+
+.profile-label {
+    font-size: 11px;
+
+    color: #777;
+
+    margin-bottom: 2px;
+}
+
+
+.profile-text strong {
+    font-size: 14px;
+
+    color: #111;
+}
+
+
+.profile-avatar {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #111;
+
+    color: white;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.app-content {
+    width: min(100% - 32px, 900px);
+
+    margin: 0 auto;
+
+    padding: 32px 0;
+}
+
+
+/* =========================================
+   WELCOME
+========================================= */
+
+.home-welcome {
+    margin-bottom: 28px;
+}
+
+
+.welcome-label {
+    display: inline-block;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+
+    color: #777;
+
+    margin-bottom: 10px;
+}
+
+
+.home-welcome h1 {
+    margin: 0;
+
+    font-size: clamp(30px, 5vw, 48px);
+
+    line-height: 1.1;
+
+    color: #111;
+}
+
+
+.home-welcome h1 span {
+    display: block;
+
+    margin-top: 4px;
+}
+
+
+.home-welcome p {
+    margin-top: 14px;
+
+    color: #777;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   RIDE CARD
+========================================= */
+
+.home-ride-card {
+    background: #111;
+
+    color: white;
+
+    padding: 28px;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+.ride-card-top {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 28px;
+}
+
+
+.ride-card-icon {
+    width: 54px;
+    height: 54px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 24px;
+
+    background: #f4c430;
+
+    border-radius: 17px;
+}
+
+
+.ride-card-label {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    opacity: 0.6;
+}
+
+
+.ride-card-top h2 {
+    margin: 5px 0 0;
+
+    font-size: 24px;
+}
+
+
+/* =========================================
+   LOCATIONS
+========================================= */
+
+.location-preview {
+    background: #1d1d1d;
+
+    border-radius: 20px;
+
+    padding: 8px 18px;
+
+    margin-bottom: 20px;
+}
+
+
+.location-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 18px 0;
+}
+
+
+.location-dot {
+    width: 13px;
+    height: 13px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+}
+
+
+.pickup-dot {
+    background: #f4c430;
+}
+
+
+.destination-dot {
+    background: #ff6b6b;
+
+    border-radius: 4px;
+}
+
+
+.location-row div:last-child {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.location-row span {
+    font-size: 12px;
+
+    opacity: 0.55;
+}
+
+
+.location-row strong {
+    font-size: 14px;
+}
+
+
+.location-line {
+    height: 1px;
+
+    margin-left: 29px;
+
+    background:
+        rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================================
+   PRIMARY BUTTON
+========================================= */
+
+.primary-ride-button {
+    width: 100%;
+
+    border: none;
+
+    padding: 17px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 16px;
+
+    background: #f4c430;
+
+    color: #111;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.primary-ride-button:hover {
+    transform: translateY(-2px);
+}
+
+
+.button-arrow {
+    font-size: 22px;
+}
+
+
+/* =========================================
+   QUICK ACTIONS
+========================================= */
+
+.quick-actions {
+    margin-top: 42px;
+}
+
+
+.section-title span {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color: #888;
+}
+
+
+.section-title h2 {
+    margin-top: 7px;
+
+    font-size: 24px;
+
+    color: #111;
+}
+
+
+.quick-actions-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+
+    margin-top: 20px;
+}
+
+
+.quick-action-card {
+    border: 1px solid #e8e8e8;
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.quick-action-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0, 0, 0, 0.08);
+}
+
+
+.quick-icon {
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 14px;
+
+    background: #f5f5f5;
+
+    font-size: 20px;
+
+    margin-bottom: 18px;
+}
+
+
+.quick-action-card strong {
+    display: block;
+
+    color: #111;
+
+    margin-bottom: 6px;
+}
+
+
+.quick-action-card span {
+    font-size: 12px;
+
+    color: #777;
+}
+
+
+.quick-arrow {
+    display: block;
+
+    margin-top: 16px;
+
+    font-size: 20px;
+}
+
+
+/* =========================================
+   BOTTOM NAVIGATION
+========================================= */
+
+.bottom-nav {
+    position: fixed;
+
+    left: 50%;
+    bottom: 16px;
+
+    transform: translateX(-50%);
+
+    width: min(100% - 32px, 600px);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    padding: 8px;
+
+    background: rgba(20, 20, 20, 0.96);
+
+    border-radius: 22px;
+
+    z-index: 1000;
+
+    box-shadow:
+        0 15px 50px
+        rgba(0, 0, 0, 0.25);
+}
+
+
+.bottom-nav-item {
+    border: none;
+
+    background: transparent;
+
+    color: #999;
+
+    padding: 10px;
+
+    border-radius: 16px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 4px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    transition: 0.2s ease;
+}
+
+
+.bottom-nav-item.active {
+    background: #f4c430;
+
+    color: #111;
+
+    font-weight: 700;
+}
+
+
+.nav-icon {
+    font-size: 19px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .app-header {
+        padding: 0 16px;
+    }
+
+
+    .profile-text {
+        display: none;
+    }
+
+
+    .quick-actions-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .app-content {
+        padding-top: 24px;
+    }
+
+
+}
+
+/* =========================================
+   PHASE 1 — MODERN RIDE HOME
+========================================= */
+
+.ride-home {
+    min-height: calc(100vh - 76px);
+    position: relative;
+    overflow: hidden;
+    background: #eef1f4;
+}
+
+
+/* =========================================
+   MAP
+========================================= */
+
+.home-map {
+    position: relative;
+
+    height: 46vh;
+    min-height: 350px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dfe5e8,
+            #f4f6f7
+        );
+}
+
+
+.map-grid {
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.45;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.8) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            rgba(255, 255, 255, 0.8) 1px,
+            transparent 1px
+        );
+
+    background-size: 46px 46px;
+}
+
+
+/* Roads */
+
+.map-road {
+    position: absolute;
+
+    height: 58px;
+
+    background: white;
+
+    border-radius: 40px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.05);
+}
+
+
+.road-one {
+    width: 120%;
+
+    top: 34%;
+
+    left: -10%;
+
+    transform: rotate(-12deg);
+}
+
+
+.road-two {
+    width: 90%;
+
+    top: 63%;
+
+    right: -15%;
+
+    transform: rotate(18deg);
+}
+
+
+.road-three {
+    width: 70%;
+
+    top: 8%;
+
+    left: -20%;
+
+    transform: rotate(28deg);
+}
+
+
+/* =========================================
+   CURRENT LOCATION
+========================================= */
+
+.current-location {
+    position: absolute;
+
+    top: 43%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    z-index: 5;
+}
+
+
+.location-marker {
+    width: 56px;
+    height: 56px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #111;
+
+    color: white;
+
+    font-size: 24px;
+
+    position: relative;
+
+    z-index: 2;
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 0, 0, 0.25);
+}
+
+
+.current-location span {
+    margin-top: 10px;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: #111;
+}
+
+
+.location-pulse {
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(244, 196, 48, 0.35);
+
+    animation:
+        locationPulse 2s infinite;
+}
+
+
+@keyframes locationPulse {
+
+    0% {
+        transform: scale(0.7);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================
+   MAP VEHICLES
+========================================= */
+
+.map-car {
+    position: absolute;
+
+    padding: 8px 10px;
+
+    border-radius: 12px;
+
+    background: white;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0, 0, 0, 0.12);
+
+    font-size: 22px;
+
+    animation:
+        carFloat 3s ease-in-out infinite;
+}
+
+
+.car-one {
+    top: 20%;
+    left: 18%;
+}
+
+
+.car-two {
+    top: 65%;
+    right: 15%;
+
+    animation-delay: 1s;
+}
+
+
+.car-three {
+    top: 38%;
+    right: 22%;
+
+    animation-delay: 2s;
+}
+
+
+@keyframes carFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-7px);
+    }
+
+}
+
+
+/* =========================================
+   BOTTOM SHEET
+========================================= */
+
+.home-sheet {
+    position: relative;
+
+    margin-top: -32px;
+
+    z-index: 10;
+
+    padding:
+        14px
+        20px
+        130px;
+
+    border-radius:
+        30px
+        30px
+        0
+        0;
+
+    background: #ffffff;
+
+    min-height: 55vh;
+}
+
+
+.sheet-handle {
+    width: 44px;
+    height: 5px;
+
+    margin:
+        0 auto
+        25px;
+
+    border-radius: 20px;
+
+    background: #dedede;
+}
+
+
+/* =========================================
+   GREETING
+========================================= */
+
+.home-greeting span {
+    font-size: 14px;
+
+    color: #777;
+}
+
+
+.home-greeting h1 {
+    margin:
+        8px 0
+        26px;
+
+    font-size:
+        clamp(
+            26px,
+            5vw,
+            38px
+        );
+
+    line-height: 1.15;
+
+    color: #111;
+}
+
+
+.home-greeting h1 strong {
+    display: block;
+
+    color: #f4c430;
+}
+
+
+/* =========================================
+   WHERE TO CARD
+========================================= */
+
+.where-to-card {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px;
+
+    border:
+        1px solid
+        #ececec;
+
+    border-radius: 20px;
+
+    background: #f7f7f7;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.where-to-card:hover {
+    transform:
+        translateY(-2px);
+
+    background: #fff;
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 0, 0, 0.08);
+}
+
+
+.where-to-icon {
+    width: 48px;
+    height: 48px;
+
+    display: grid;
+    place-items: center;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    background: #111;
+
+    font-size: 20px;
+}
+
+
+.where-to-text {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    flex: 1;
+}
+
+
+.where-to-text strong {
+    font-size: 17px;
+
+    color: #111;
+}
+
+
+.where-to-text span {
+    font-size: 12px;
+
+    color: #777;
+}
+
+
+.where-to-arrow {
+    font-size: 28px;
+
+    color: #999;
+}
+
+
+/* =========================================
+   QUICK PLACES
+========================================= */
+
+.home-places {
+    margin-top: 30px;
+}
+
+
+.places-title {
+    margin-bottom: 12px;
+}
+
+
+.places-title span {
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    color: #999;
+}
+
+
+.place-item {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding:
+        14px 0;
+
+    border: none;
+
+    border-bottom:
+        1px solid
+        #f0f0f0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition:
+        0.2s ease;
+}
+
+
+.place-item:hover {
+    transform:
+        translateX(4px);
+}
+
+
+.place-icon {
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 14px;
+
+    background: #f5f5f5;
+
+    font-size: 19px;
+
+    flex-shrink: 0;
+}
+
+
+.home-place {
+    background: #fff7d6;
+}
+
+
+.work-place {
+    background: #e9efff;
+}
+
+
+.recent-place {
+    background: #f2f2f2;
+}
+
+
+.place-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    flex: 1;
+}
+
+
+.place-info strong {
+    font-size: 15px;
+
+    color: #111;
+}
+
+
+.place-info span {
+    font-size: 12px;
+
+    color: #888;
+}
+
+
+.place-arrow {
+    font-size: 25px;
+
+    color: #aaa;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .home-map {
+        height: 42vh;
+        min-height: 300px;
+    }
+
+
+    .home-sheet {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+
+    .car-three {
+        display: none;
+    }
+
+}
+
+/* =========================================
+   PHASE 1.1 — RESPONSIVE RIDE SEARCH
+========================================= */
+
+.ride-search-sheet {
+    position: relative;
+
+    margin-top: -35px;
+
+    z-index: 20;
+
+    width: min(100%, 760px);
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding: 18px 24px 50px;
+
+    background: #ffffff;
+
+    border-radius: 32px 32px 0 0;
+
+    box-shadow:
+        0 -10px 40px
+        rgba(0, 0, 0, 0.06);
+}
+
+
+/* LOCATION CARD */
+
+.location-search-card {
+
+    width: 100%;
+
+    background: #f5f5f5;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 22px;
+
+    padding: 4px 18px;
+
+}
+
+
+/* INPUT ROW */
+
+.location-input-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 16px 0;
+
+}
+
+
+/* SYMBOL */
+
+.location-symbol {
+
+    width: 14px;
+    height: 14px;
+
+    flex-shrink: 0;
+
+}
+
+
+.pickup-symbol {
+
+    border-radius: 50%;
+
+    background: #111;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(0, 0, 0, 0.08);
+
+}
+
+
+.destination-symbol {
+
+    border-radius: 4px;
+
+    background: #f4c430;
+
+}
+
+
+/* INPUT */
+
+.location-input-wrapper {
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.location-input-wrapper label {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    color: #999;
+
+}
+
+
+.location-input-wrapper input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    padding: 0;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: #111;
+
+}
+
+
+.location-input-wrapper input::placeholder {
+
+    color: #aaa;
+
+    font-weight: 400;
+
+}
+
+
+/* DIVIDER */
+
+.location-divider {
+
+    height: 1px;
+
+    margin-left: 28px;
+
+    background: #dddddd;
+
+}
+
+
+/* =========================================
+   LOCATION SUGGESTIONS
+========================================= */
+
+.location-suggestions {
+
+    display: none;
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    border-radius: 18px;
+
+    background: white;
+
+    overflow: hidden;
+
+    border: 1px solid #eeeeee;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.08);
+
+}
+
+
+.location-suggestion {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px 18px;
+
+    border: none;
+
+    border-bottom:
+        1px solid #f2f2f2;
+
+    background: white;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+
+}
+
+
+.location-suggestion:hover {
+
+    background: #f8f8f8;
+
+}
+
+
+.suggestion-icon {
+
+    font-size: 18px;
+
+}
+
+
+.no-location {
+
+    padding: 18px;
+
+    text-align: center;
+
+    color: #888;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================
+   FIND RIDES BUTTON
+========================================= */
+
+.home-find-rides-btn {
+
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 18px 20px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: #111;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.home-find-rides-btn:hover:not(:disabled) {
+
+    transform: translateY(-2px);
+
+    background: #222;
+
+}
+
+
+.home-find-rides-btn:disabled {
+
+    opacity: 0.4;
+
+    cursor: not-allowed;
+
+}
+
+
+.home-find-rides-btn span {
+
+    font-size: 22px;
+
+}
+
+
+/* =========================================
+   QUICK LOCATIONS
+========================================= */
+
+.quick-locations {
+
+    margin-top: 30px;
+
+}
+
+
+.quick-title {
+
+    display: block;
+
+    margin-bottom: 14px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    color: #999;
+
+}
+
+
+.quick-location-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+}
+
+
+.quick-location {
+
+    border: 1px solid #eeeeee;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 15px 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.quick-location:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.08);
+
+}
+
+
+.quick-location span {
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #444;
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .ride-search-sheet {
+
+        width: 100%;
+
+        padding-left: 20px;
+        padding-right: 20px;
+
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .ride-home {
+
+        min-height: 100vh;
+
+    }
+
+
+    .home-map {
+
+        height: 32vh;
+
+        min-height: 240px;
+
+    }
+
+
+    .ride-search-sheet {
+
+        margin-top: -25px;
+
+        padding:
+            15px
+            16px
+            40px;
+
+        border-radius:
+            26px
+            26px
+            0
+            0;
+
+    }
+
+
+    .home-greeting h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .location-search-card {
+
+        padding:
+            4px
+            14px;
+
+        border-radius: 18px;
+
+    }
+
+
+    .location-input-row {
+
+        padding:
+            14px
+            0;
+
+    }
+
+
+    .location-input-wrapper input {
+
+        font-size: 14px;
+
+    }
+
+
+    .quick-location-grid {
+
+        gap: 8px;
+
+    }
+
+
+    .quick-location {
+
+        padding:
+            12px
+            5px;
+
+        font-size: 18px;
+
+    }
+
+}
+
+
+
+
+
+/* =========================================
+   PHASE 2 — RIDE FLOW SCREENS
+   (vehicle selection, confirm, current ride,
+   payment, ride history, profile)
+========================================= */
+
+.screen-topbar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+
+.screen-topbar h2 {
+    font-size: 20px;
+}
+
+
+.back-button {
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--surface);
+
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+.back-button:hover {
+    background: var(--primary-light);
+    border-color: var(--primary);
+}
+
+
+/* Small stylised map reused across the vehicle-selection
+   and current-ride screens (no live maps API is wired up) */
+
+.mini-map {
+    position: relative;
+    height: 160px;
+
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 20px;
+
+    background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+}
+
+
+/* =========================================
+   TRIP ROUTE SUMMARY
+========================================= */
+
+.trip-route-summary {
+    position: relative;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+
+.route-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+
+.route-point label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: var(--text-light);
+    margin-bottom: 2px;
+}
+
+
+.route-point strong {
+    font-size: 14px;
+}
+
+
+.route-connector {
+    width: 2px;
+    height: 22px;
+    margin-left: 5px;
+
+    background: repeating-linear-gradient(
+        to bottom,
+        var(--border) 0 4px,
+        transparent 4px 8px
+    );
+}
+
+
+.route-distance {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+
+    background: var(--primary-light);
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+
+/* =========================================
+   VEHICLE SELECTION
+========================================= */
+
+.vehicle-screen,
+.confirm-screen,
+.current-ride-screen,
+.payment-screen,
+.history-screen,
+.profile-screen {
+    padding-bottom: 110px;
+}
+
+
+.vehicle-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+.ride-vehicle-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    width: 100%;
+
+    padding: 16px 18px;
+
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+
+    text-align: left;
+    cursor: pointer;
+
+    transition: all 0.15s ease;
+}
+
+
+.ride-vehicle-card:hover {
+    border-color: var(--primary);
+}
+
+
+.ride-vehicle-card.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+
+.ride-vehicle-card .vehicle-icon {
+    font-size: 30px;
+    width: 46px;
+    text-align: center;
+}
+
+
+.vehicle-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+.vehicle-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+
+.vehicle-arrival-time {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+
+.vehicle-subtitle {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 2px;
+}
+
+
+.vehicle-price {
+    font-size: 16px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   STICKY CONFIRM BAR
+========================================= */
+
+.sticky-confirm-bar {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+
+    width: min(100% - 32px, 600px);
+
+    z-index: 900;
+}
+
+
+/* =========================================
+   CONFIRM SCREEN
+========================================= */
+
+.confirm-vehicle-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 18px;
+    margin-bottom: 18px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+
+.confirm-vehicle-card .vehicle-icon {
+    font-size: 34px;
+}
+
+
+.confirm-vehicle-card p {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 2px;
+}
+
+
+.confirm-fare {
+    margin-left: auto;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+.payment-method-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    margin-bottom: 18px;
+}
+
+
+.payment-method-card .section-title {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: var(--text-light);
+    margin-bottom: 12px;
+}
+
+
+.payment-method-options {
+    display: flex;
+    gap: 10px;
+}
+
+
+.payment-method-option {
+    flex: 1;
+
+    padding: 14px;
+
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+
+.payment-method-option.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+
+.confirm-message {
+    color: var(--danger);
+    font-size: 13px;
+    min-height: 18px;
+    margin-bottom: 8px;
+}
+
+
+/* =========================================
+   CURRENT RIDE / FINDING DRIVER
+========================================= */
+
+.ride-status-card {
+    position: relative;
+
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+
+    padding: 28px 22px;
+    text-align: center;
+}
+
+
+.ride-status-card h2 {
+    font-size: 20px;
+    margin: 10px 0 4px;
+}
+
+
+.ride-status-card p {
+    color: var(--text-light);
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+
+.search-animation,
+.driver-en-route-icon {
+    position: relative;
+
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 14px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 36px;
+
+    background: var(--primary-light);
+    border-radius: 50%;
+}
+
+
+.pulse-ring {
+    position: absolute;
+    inset: 0;
+
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+
+    animation: pulse-ring-anim 1.8s ease-out infinite;
+    opacity: 0;
+}
+
+
+.pulse-ring.ring-two {
+    animation-delay: 0.6s;
+}
+
+
+@keyframes pulse-ring-anim {
+    0% { transform: scale(0.8); opacity: 0.6; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+
+.ride-request-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    text-align: left;
+
+    background: var(--background);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+}
+
+
+.ride-request-info span {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+    margin-bottom: 2px;
+}
+
+
+.ride-request-info strong {
+    font-size: 13px;
+}
+
+
+.request-divider {
+    width: 1px;
+    align-self: stretch;
+    background: var(--border);
+}
+
+
+.cancel-request-btn {
+    width: 100%;
+    padding: 14px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: var(--danger);
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.cancel-request-btn:hover {
+    background: #dc2626;
+}
+
+
+/* =========================================
+   PAYMENT SCREEN
+========================================= */
+
+.fare-total-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px;
+    margin-bottom: 18px;
+
+    background: var(--dark);
+    color: #fff;
+    border-radius: var(--radius-lg);
+}
+
+
+.fare-total-card strong {
+    font-size: 22px;
+}
+
+
+.payment-success-icon {
+    font-size: 48px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+
+.payment-screen h2 {
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+
+.payment-screen > p {
+    text-align: center;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+
+/* =========================================
+   PROFILE SCREEN
+========================================= */
+
+.profile-hero {
+    text-align: center;
+    padding: 20px 0 24px;
+}
+
+
+.profile-hero-avatar {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 12px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+    background: var(--dark);
+    color: #fff;
+
+    font-size: 26px;
+    font-weight: 700;
+}
+
+
+.profile-details-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 6px 20px;
+    margin-bottom: 24px;
+}
+
+
+.profile-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 16px 0;
+}
+
+
+.profile-detail-row + .profile-detail-row {
+    border-top: 1px solid var(--border);
+}
+
+
+.profile-detail-row span {
+    color: var(--text-light);
+    font-size: 13px;
+}
+
+
+/* =========================================
+   PHASE 3 — REALISTIC RIDE-FLOW POLISH
+   (route map, progress stepper, driver
+   profile card, fare breakdown, tags)
+========================================= */
+
+.route-map {
+    position: relative;
+    height: 170px;
+
+    margin-bottom: 20px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+
+    background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+}
+
+
+.route-map-svg {
+    width: 100%;
+    height: 100%;
+}
+
+
+.route-map-labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+
+.route-map-label {
+    position: absolute;
+    font-size: 11px;
+    font-weight: 700;
+
+    background: rgba(255, 255, 255, 0.85);
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+
+.route-map-label.pickup {
+    left: 6%;
+    bottom: 8%;
+}
+
+
+.route-map-label.drop {
+    right: 4%;
+    top: 8%;
+}
+
+
+.route-map-search-rings {
+    position: absolute;
+    left: 10%;
+    bottom: 18%;
+
+    width: 60px;
+    height: 60px;
+}
+
+
+.route-map-search-rings .pulse-ring {
+    border-color: var(--primary);
+}
+
+
+/* =========================================
+   VEHICLE LIST HEADER + TAGS
+========================================= */
+
+.vehicle-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+
+.vehicle-list-header span:first-child {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+
+.vehicle-tag {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+
+.tag-value {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+.tag-fast {
+    background: #fef9c3;
+    color: #a16207;
+}
+
+
+.vehicle-fare-breakdown {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 4px;
+}
+
+
+/* =========================================
+   FARE BREAKDOWN CARD (confirm/payment)
+========================================= */
+
+.fare-breakdown-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+    margin-bottom: 18px;
+}
+
+
+.fare-breakdown-row {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 13px;
+    color: var(--text-light);
+
+    padding: 6px 0;
+}
+
+
+.fare-breakdown-row.total {
+    border-top: 1px dashed var(--border);
+    margin-top: 4px;
+    padding-top: 10px;
+
+    font-weight: 800;
+    color: var(--text);
+    font-size: 14px;
+}
+
+
+/* =========================================
+   PROGRESS STEPPER
+========================================= */
+
+.progress-stepper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+    padding: 0 6px;
+}
+
+
+.progress-step {
+    flex: 1;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+
+.progress-step::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: -50%;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+}
+
+
+.progress-step:first-child::before {
+    display: none;
+}
+
+
+.progress-step-dot {
+    position: relative;
+    z-index: 1;
+
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+
+    background: var(--border);
+    border: 2px solid var(--surface);
+}
+
+
+.progress-step-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-light);
+    text-align: center;
+}
+
+
+.progress-step.done .progress-step-dot {
+    background: var(--success, #22c55e);
+}
+
+
+.progress-step.done::before {
+    background: var(--success, #22c55e);
+}
+
+
+.progress-step.active .progress-step-dot {
+    background: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+
+.progress-step.active .progress-step-label {
+    color: var(--primary);
+}
+
+
+/* =========================================
+   DRIVER PROFILE CARD
+========================================= */
+
+.driver-profile-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+
+    background: var(--background);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+}
+
+
+.driver-avatar {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 24px;
+    border-radius: 50%;
+    background: var(--primary-light);
+}
+
+
+.driver-profile-details {
+    flex: 1;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+
+.driver-profile-details strong {
+    font-size: 14px;
+}
+
+
+.driver-rating {
+    font-size: 12px;
+    color: #d97706;
+}
+
+
+.driver-plate {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 1px dashed var(--border);
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   ETA LINE
+========================================= */
+
+.eta-line {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 14px;
+}
+
+
+.eta-line strong {
+    color: var(--primary);
+    font-size: 16px;
+}
+
+
+.eta-line.eta-arrived strong,
+.eta-line.eta-arrived {
+    color: var(--success, #22c55e);
+    font-weight: 700;
+}
+
+
+/* =========================================
+   PHASE 4 — SEARCH TIMEOUT, RATING
+========================================= */
+
+.search-timeout-line {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 14px;
+}
+
+
+.secondary-text-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+
+    border: none;
+    background: none;
+
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-light);
+
+    cursor: pointer;
+}
+
+
+.secondary-text-btn:hover {
+    color: var(--primary);
+}
+
+
+/* =========================================
+   RATE YOUR DRIVER
+========================================= */
+
+.rate-driver-card {
+    text-align: center;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    padding: 22px;
+    margin: 20px 0;
+}
+
+
+.rate-driver-card .driver-avatar {
+    margin: 0 auto 10px;
+}
+
+
+.rate-driver-card p {
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+
+.rating-stars {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+
+.rating-star {
+    font-size: 28px;
+    line-height: 1;
+
+    border: none;
+    background: none;
+    color: #d1d5db;
+
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+
+.rating-star:hover {
+    transform: scale(1.15);
+}
+
+
+.rating-star.filled {
+    color: #f59e0b;
+}
+
+
+.rating-thanks {
+    min-height: 16px;
+    margin-top: 8px;
+}
+
+/* =========================================
+   DESKTOP SIDEBAR NAVIGATION
+========================================= */
+.app-layout {
+    padding-bottom: 0;
+    padding-left: 250px;
+}
+
+.side-nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    padding: 28px 18px;
+    background: #111;
+    color: #fff;
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.side-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px 30px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.side-nav-brand .brand-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.side-nav-label {
+    padding: 0 12px 10px;
+    color: #777;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.side-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.side-nav-item {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: #aaa;
+    padding: 13px 14px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.side-nav-item:hover {
+    background: #1d1d1d;
+    color: #fff;
+}
+
+.side-nav-item.active {
+    background: #f4c430;
+    color: #111;
+}
+
+.side-nav-icon {
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.side-nav-book {
+    margin-bottom: 10px;
+}
+
+.side-nav-divider {
+    height: 1px;
+    background: rgba(255,255,255,.1);
+    margin: 12px 12px 18px;
+}
+
+.side-nav-user {
+    margin-top: auto;
+    padding: 15px 12px;
+    border-radius: 16px;
+    background: #1b1b1b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.side-nav-user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f4c430;
+    color: #111;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+}
+
+.side-nav-user-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-nav-user-info span {
+    color: #777;
+    font-size: 10px;
+}
+
+.side-nav-user-info strong {
+    color: #fff;
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Keep the original bottom navigation as the mobile navigation. */
+@media (max-width: 850px) {
+    .app-layout {
+        padding-left: 0;
+        padding-bottom: 90px;
+    }
+
+    .side-nav {
+        display: none;
+    }
+}
+
+@media (min-width: 851px) {
+    .bottom-nav {
+        display: none;
+    }
+
+    .app-header {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .app-content {
+        width: min(100% - 48px, 1100px);
+    }
+}

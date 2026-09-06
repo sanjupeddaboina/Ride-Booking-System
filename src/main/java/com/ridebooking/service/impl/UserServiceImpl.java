@@ -74,16 +74,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public AuthResponse loginUser(UserLoginRequest request) {
 
+        // 1. Authenticate email and password
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
-                        request.getPassword()));
+                        request.getPassword()
+                ));
 
+        // 2. Get logged-in user from database
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found"));
+
+        // 3. Generate JWT token
         String token = jwtService.generateToken(
                 request.getEmail(),
                 "USER");
 
-        return new AuthResponse(token, "USER");
+        // 4. Return token + role + user ID
+        return new AuthResponse(
+                token,
+                "USER",
+                user.getId()
+        );
     }
 
     @Override
@@ -93,30 +106,6 @@ public class UserServiceImpl implements UserService {
         User user = getUserById(userId);
 
         return mapToUserResponse(user);
-    }
-
-    @Override
-    public RideResponse bookRide(RideResponse rideRequest) {
-        User user = getUserById(rideRequest.getUserId());
-
-        boolean activeRideExists = rideRepository.existsByUserIdAndStatusIn(
-                user.getId(),
-                List.of(RideStatus.BOOKED, RideStatus.ACCEPTED, RideStatus.STARTED));
-
-        if (activeRideExists) {
-            throw new BusinessException("You already have an active ride. Cannot book another ride at this time.");
-        }
-
-        Ride ride = Ride.builder()
-                .user(user)
-                .pickupAddress(rideRequest.getPickupAddress())
-                .dropAddress(rideRequest.getDropAddress())
-                .status(RideStatus.BOOKED)
-                .build();
-
-        Ride savedRide = rideRepository.save(ride);
-
-        return mapToRideResponse(savedRide);
     }
 
     @Override

@@ -6,10 +6,11 @@ import com.ridebooking.service.RideService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/rides")
+@RequestMapping("/api/v1/users")
 public class RideController {
 
     private final RideService rideService;
@@ -18,7 +19,17 @@ public class RideController {
         this.rideService = rideService;
     }
 
-    @PutMapping("/{rideId}/accept")
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/{userId}/rides/book")
+    public ResponseEntity<RideResponse> bookRide(
+            @PathVariable Long userId,
+            @Valid @RequestBody BookingRideRequest request) {
+        RideResponse rideResponse = rideService.bookRide(userId, request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(rideResponse);
+    }
+
+    @PreAuthorize("hasRole('DRIVER')")
+    @PutMapping("/{rideId}/rides/accept")
     public ResponseEntity<RideResponse> acceptRide(@PathVariable Long rideId, @Valid @RequestBody AcceptRideRequest request) {
         // rideId now comes solely from the URL path, so there's no way for a
         // client to accept a different ride than the one named in the URL.
@@ -26,18 +37,22 @@ public class RideController {
         return ResponseEntity.ok(rideResponse);
     }
 
-    @PutMapping("/{rideId}/start")
+    @PreAuthorize("hasRole('DRIVER')")
+    @PutMapping("/{rideId}/rides/start")
     public ResponseEntity<RideResponse> startRide(@PathVariable Long rideId, @Valid @RequestBody StartRideRequest request) {
         RideResponse rideResponse = rideService.startRide(request.getDriverId(), rideId);
         return ResponseEntity.ok(rideResponse);
     }
 
-    @PutMapping("/{rideId}/complete")
+    @PreAuthorize("hasRole('DRIVER')")
+    @PutMapping("/{rideId}/rides/complete")
     public ResponseEntity<RideResponse> completeRide(@PathVariable Long rideId, @Valid @RequestBody CompleteRideRequest request) {
         RideResponse rideResponse = rideService.completeRide(request.getDriverId(), rideId);
         return ResponseEntity.ok(rideResponse);
     }
-    @PutMapping("/{rideId}/cancel")
+
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping("/{rideId}/rides/cancel")
     public ResponseEntity<RideResponse> cancelRide(@PathVariable Long rideId, @Valid @RequestBody CancelRideRequest request) {
         RideResponse rideResponse = rideService.cancelRide(request.getUserId(), rideId);
         return ResponseEntity.ok(rideResponse);

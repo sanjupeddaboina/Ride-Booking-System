@@ -6,6 +6,7 @@ import com.ridebooking.service.PaymentService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +23,8 @@ public class PaymentController {
         PaymentResponse response = paymentService.makePayment(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/rides/{rideId}")
     public ResponseEntity<PaymentResponse> getPaymentByRideId(@PathVariable Long rideId) {
         PaymentResponse paymentResponse = paymentService.getPaymentByRideId(rideId);

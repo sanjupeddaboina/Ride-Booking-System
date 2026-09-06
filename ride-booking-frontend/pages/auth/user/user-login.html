@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Login | RideFlow</title>
+
+    <link rel="stylesheet" href="../../../css/global.css">
+    <link rel="stylesheet" href="../../../css/auth.css">
+</head>
+
+<body>
+
+<div class="auth-page">
+
+    <!-- LEFT SIDE -->
+    <section class="auth-brand-section">
+
+        <a href="../../../index.html" class="auth-brand">
+            <span>🚕</span>
+            RideFlow
+        </a>
+
+        <div class="auth-brand-content">
+
+            <span class="auth-tag">
+                SMART RIDE BOOKING
+            </span>
+
+            <h1>
+                Your journey
+                <span>starts here.</span>
+            </h1>
+
+            <p>
+                Book rides quickly, securely manage your trips,
+                and enjoy a smooth ride booking experience.
+            </p>
+
+            <div class="auth-features">
+
+                <div class="auth-feature">
+                    <span>⚡</span>
+                    <p>Fast ride booking</p>
+                </div>
+
+                <div class="auth-feature">
+                    <span>📍</span>
+                    <p>Track your ride</p>
+                </div>
+
+                <div class="auth-feature">
+                    <span>🔐</span>
+                    <p>Secure authentication</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="auth-quote">
+            "Your next destination is just one booking away."
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+    <section class="auth-form-section">
+
+        <div class="auth-form-wrapper">
+
+            <a href="../../../index.html" class="mobile-brand">
+                🚕 RideFlow
+            </a>
+
+            <div class="form-heading">
+
+                <span class="form-tag">
+                    USER ACCOUNT
+                </span>
+
+                <h2>Welcome back</h2>
+
+                <p>
+                    Enter your details to continue to your dashboard.
+                </p>
+
+            </div>
+
+
+            <form id="userLoginForm" class="modern-auth-form">
+
+                <div class="input-group">
+
+                    <label for="email">
+                        Email address
+                    </label>
+
+                    <input
+                            type="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                    >
+
+                </div>
+
+
+                <button type="submit" class="auth-submit-btn">
+                    Sign in to RideFlow
+                    <span>→</span>
+                </button>
+
+            </form>
+
+
+            <p id="message" class="auth-message"></p>
+
+
+            <div class="auth-divider">
+                <span>New to RideFlow?</span>
+            </div>
+
+
+            <p class="auth-switch">
+
+                Don't have a user account?
+
+                <a href="user-register.html">
+                    Create account
+                </a>
+
+            </p>
+
+
+            <div class="auth-back">
+                <a href="../../../index.html">
+                    ← Back to home
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- Configuration -->
+<script src="../../../js/config.js"></script>
+
+<!-- Utilities -->
+<script src="../../../js/utils/storage.js"></script>
+
+<!-- API -->
+<script src="../../../js/api/api-client.js"></script>
+<script src="../../../js/api/user-api.js"></script>
+
+<!-- Login Logic -->
+<script src="../../../js/auth/user/user-login.js"></script>
+
+</body>
+</html>

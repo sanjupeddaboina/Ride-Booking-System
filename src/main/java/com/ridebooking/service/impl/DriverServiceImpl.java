@@ -80,16 +80,29 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public AuthResponse loginDriver(DriverLoginRequest request) {
 
+        // 1. Authenticate driver
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
-                        request.getPassword()));
+                        request.getPassword()
+                ));
 
+        // 2. Get driver from database
+        Driver driver = driverRepository.findByEmail(request.getEmail())
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Driver not found"));
+
+        // 3. Generate JWT token
         String token = jwtService.generateToken(
                 request.getEmail(),
                 "DRIVER");
 
-        return new AuthResponse(token, "DRIVER");
+        // 4. Return token + role + driver ID
+        return new AuthResponse(
+                token,
+                "DRIVER",
+                driver.getId()
+        );
     }
 
     @Override

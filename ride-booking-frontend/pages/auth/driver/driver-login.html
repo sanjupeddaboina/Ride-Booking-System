@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Driver Login | RideFlow</title>
+
+    <link rel="stylesheet" href="../../../css/global.css">
+    <link rel="stylesheet" href="../../../css/auth.css">
+</head>
+
+<body>
+
+<div class="auth-page">
+
+    <!-- LEFT BRAND SECTION -->
+    <section class="auth-brand-section">
+
+        <a href="../../../index.html" class="auth-brand">
+            <span>🚕</span>
+            RideFlow
+        </a>
+
+        <div class="auth-brand-content">
+
+            <span class="auth-tag">
+                DRIVE WITH RIDEFLOW
+            </span>
+
+            <h1>
+                Ready to
+                <span>drive?</span>
+            </h1>
+
+            <p>
+                Login to manage your rides, accept ride requests,
+                track completed trips, and monitor your earnings.
+            </p>
+
+            <div class="auth-features">
+
+                <div class="auth-feature">
+                    <span>🚗</span>
+                    <p>Accept available rides</p>
+                </div>
+
+                <div class="auth-feature">
+                    <span>📍</span>
+                    <p>Manage your active ride</p>
+                </div>
+
+                <div class="auth-feature">
+                    <span>💰</span>
+                    <p>Track your earnings</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="auth-quote">
+            "Every ride is a new opportunity."
+        </div>
+
+    </section>
+
+
+    <!-- LOGIN FORM -->
+    <section class="auth-form-section">
+
+        <div class="auth-form-wrapper">
+
+            <a href="../../../index.html" class="mobile-brand">
+                🚕 RideFlow
+            </a>
+
+            <div class="form-heading">
+
+                <span class="form-tag">
+                    DRIVER ACCOUNT
+                </span>
+
+                <h2>Welcome back, Driver.</h2>
+
+                <p>
+                    Enter your credentials to access your driver dashboard.
+                </p>
+
+            </div>
+
+
+            <form id="driverLoginForm" class="modern-auth-form">
+
+                <div class="input-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                            type="email"
+                            id="email"
+                            placeholder="driver@example.com"
+                            required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                    >
+
+                </div>
+
+
+                <button type="submit" class="auth-submit-btn">
+                    Login as Driver
+                    <span>→</span>
+                </button>
+
+            </form>
+
+
+            <p id="message" class="auth-message"></p>
+
+
+            <div class="auth-divider">
+                <span>New to RideFlow?</span>
+            </div>
+
+
+            <p class="auth-switch">
+
+                Want to become a driver?
+
+                <a href="driver-register.html">
+                    Register now
+                </a>
+
+            </p>
+
+
+            <div class="auth-back">
+
+                <a href="../../../index.html">
+                    ← Back to home
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- Foundation -->
+<script src="../../../js/config.js"></script>
+<script src="../../../js/utils/storage.js"></script>
+
+<!-- API -->
+<script src="../../../js/api/api-client.js"></script>
+<script src="../../../js/api/driver-api.js"></script>
+
+<!-- Login Logic -->
+<script src="../../../js/auth/driver/driver-login.js"></script>
+
+</body>
+
+</html>

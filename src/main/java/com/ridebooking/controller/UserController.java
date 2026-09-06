@@ -11,6 +11,7 @@ import com.ridebooking.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +51,7 @@ public class UserController {
         return ResponseEntity.ok(userResponse);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/{userId}")
     public ResponseEntity<UserResponse> getByUserId(
             @PathVariable Long userId) {
@@ -59,18 +61,7 @@ public class UserController {
         return ResponseEntity.ok(userResponse);
     }
 
-    @PostMapping("/{userId}/book")
-    public ResponseEntity<RideResponse> bookRide(
-            @PathVariable Long userId,
-            @Valid @RequestBody BookingRideRequest request) {
-
-        RideResponse response = rideService.bookRide(userId, request);
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(response);
-    }
-
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/{userId}/current")
     public ResponseEntity<RideResponse> getCurrentRide(
             @PathVariable Long userId) {
@@ -80,6 +71,7 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/{userId}/rides")
     public ResponseEntity<List<RideResponse>> getRideHistory(
             @PathVariable Long userId) {
