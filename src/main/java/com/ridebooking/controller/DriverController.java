@@ -67,6 +67,13 @@ public class DriverController {
     }
 
     @PreAuthorize("hasRole('DRIVER')")
+    @GetMapping("/{driverId}")
+    public ResponseEntity<DriverResponse> getProfile(@PathVariable Long driverId) {
+        DriverResponse driverResponse = driverService.getDriverProfile(driverId);
+        return ResponseEntity.ok(driverResponse);
+    }
+
+    @PreAuthorize("hasRole('DRIVER')")
     @GetMapping("/{driverId}/rides")
     public ResponseEntity<java.util.List<RideResponse>> getDriverRideHistory(@PathVariable Long driverId) {
         java.util.List<RideResponse> rideHistory = driverService.getDriverRideHistory(driverId);

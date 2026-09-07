@@ -23,4 +23,6 @@ public interface DriverService {
 
     Double getDriverEarnings(Long driverId);
     List<RideResponse> getDriverRideHistory(Long driverId);
+
+    DriverResponse getDriverProfile(Long driverId);
 }

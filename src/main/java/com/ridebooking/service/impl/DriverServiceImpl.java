@@ -196,6 +196,13 @@ public class DriverServiceImpl implements DriverService {
                 .toList();
     }
 
+    @Override
+    public DriverResponse getDriverProfile(Long driverId) {
+        Driver driver = driverRepository.findById(driverId)
+                .orElseThrow(() -> new ResourceNotFoundException("Driver not found"));
+        return mapToDriverResponse(driver);
+    }
+
     private DriverResponse mapToDriverResponse(Driver driver) {
         return DriverResponse.builder()
                 .id(driver.getId())
