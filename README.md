@@ -1,364 +1,333 @@
 # 🚖 Ride Booking System
 
-## 📖 Introduction
-
-The Ride Booking System is a backend REST API application developed using Spring Boot that simulates the core functionalities of ride-hailing platforms like Uber, Ola, and Rapido. The application enables users to register, authenticate, book rides, and view ride history, while allowing drivers to manage ride requests, update availability, accept rides, start trips, complete rides, and track their earnings. It also includes automatic driver assignment, distance-based fare calculation, payment processing, and ride lifecycle management.
-
-The project is built using Layered Architecture and follows industry-standard backend development practices, including RESTful API design, DTO Pattern, Spring Data JPA, Hibernate, Bean Validation, Global Exception Handling, and Business Rule Validation, making it a strong backend project for learning enterprise application development.
-
-## Key Contributions :
-
-1. Designed and implemented the complete ride lifecycle, including ride booking, automatic driver assignment, ride acceptance, trip start/completion, ride cancellation, payment processing, ride history, and driver earnings management.
-2. Designed a normalized relational database schema and implemented One-to-One, One-to-Many, and Many-to-One relationships using Spring Data JPA and Hibernate for User, Driver, Ride, and Payment entities.
-3. Implemented robust business validations to enforce real-world constraints, such as preventing multiple active rides, validating ride status transitions, restricting ride cancellation after driver acceptance, and allowing payments only after ride completion.
-5. Developed 30+ RESTful APIs for user, driver, ride, and payment management using appropriate HTTP methods, status codes, and consistent JSON responses.
-6. Applied the DTO Pattern, Bean Validation, and Global Exception Handling (@ControllerAdvice) to improve API validation, maintainability, and error handling.
-7. Implemented distance-based fare calculation, driver earnings calculation, and a simulated payment workflow to replicate real-world ride booking operations.
-8. Implemented Spring Security with BCrypt password encryption, JWT-based Authentication, Role-Based Access Control (RBAC), Security Filter Chain, and secure API authorization.
-9. Tested all APIs using Postman, covering CRUD operations, complete ride workflows, input validation, exception handling, and edge-case scenarios.
-10. Used Git for version control and followed modular, maintainable coding practices to support scalability and future enhancements.
+A full-stack Ride Booking Application with a **Spring Boot REST API backend** and a **vanilla HTML/CSS/JS frontend**. It covers the full ride lifecycle — registration, login, ride booking, automatic driver assignment, ride progress, payment, and earnings — secured with JWT authentication and role-based access control.
 
 ---
 
-# ✨ Features
+## 📖 Overview
 
-## 👤 User Module
+The system has two independent parts in this repository:
 
-- User Registration
-- User Login
-- Get User Details
-- Book a Ride
-- View Current Ride
-- View Ride History (Completed Rides)
+| Part | Location | Stack |
+|---|---|---|
+| **Backend API** | `src/` | Java 17, Spring Boot 3.5, Spring Security, Spring Data JPA (Hibernate), MySQL |
+| **Frontend** | `ride-booking-frontend/` | Static HTML, CSS, vanilla JavaScript (no build step) |
 
----
-
-## 🚗 Driver Module
-
-- Driver Registration
-- Driver Login
-- Update Driver Status (Online / Offline)
-- View Pending Ride Request
-- View Current Ride
-- View Ride History
-- View Total Earnings
+Users can register, log in, book a ride, and view ride history. Drivers can register, log in, go online/offline, and manage the lifecycle of a ride (accept → start → complete). Fares are calculated automatically based on vehicle type and distance, and a simulated payment can be recorded once a ride is completed.
 
 ---
 
-## 🚕 Ride Module
+## ✨ Features
 
-- Book Ride
-- Automatic Driver Assignment
-- Random Driver Selection (Current Implementation)
-- Accept Ride
-- Start Ride
-- Complete Ride
-- Cancel Ride
-- Ride Status Management
+### 👤 User
+- Register / log in (JWT issued on login)
+- View own profile
+- Book a ride (pickup, drop, distance, vehicle type)
+- View current active ride
+- View ride history
+- Cancel a ride (only while it's still `BOOKED`)
+
+### 🚗 Driver
+- Register / log in (JWT issued on login)
+- Toggle status: `ONLINE` / `OFFLINE`
+- View pending (assigned but not yet accepted) ride
+- View current active ride
+- Accept → Start → Complete a ride
+- View ride history
+- View total earnings
+
+### 🚕 Ride Engine
+- Automatic driver assignment: a random available online driver matching the requested vehicle type is assigned at booking time (not at acceptance time), so no driver can be double-booked
+- Distance-based fare calculation per vehicle type
+- Full status lifecycle with server-side transition validation
+- Business rules preventing a rider or driver from holding more than one active ride
+
+### 💳 Payment
+- Record a payment against a completed ride (`CASH` or `UPI`)
+- Look up a payment by ride ID
+
+### 🔐 Security
+- BCrypt password hashing
+- JWT-based stateless authentication
+- Role-based access control (`ROLE_USER` / `ROLE_DRIVER`) enforced both at the security-filter-chain level and with `@PreAuthorize` on controller methods
+- CORS configured for local frontend origins
 
 ---
 
-## 💳 Payment Module
-
-- Make Payment
-- Retrieve Payment by Ride ID
-- Payment Validation
-- Prevent Duplicate Payments
-
----
-
-# 📌 Ride Lifecycle
+## 📌 Ride Lifecycle
 
 ```
-User Books Ride
-        │
-        ▼
-Driver Assigned
-        │
-        ▼
-Ride BOOKED
-        │
-        ▼
-Driver ACCEPTS Ride
-        │
-        ▼
-Ride STARTED
-        │
-        ▼
-Ride COMPLETED
-        │
-        ▼
-Payment SUCCESS
-```
-
----
-
-# 🏗️ Project Architecture
-
-The project follows **Layered Architecture**.
-
-```
-Controller
+User books ride
       │
       ▼
-Service
+Driver auto-assigned  →  status: BOOKED
       │
       ▼
-Repository
+Driver accepts         →  status: ACCEPTED
       │
       ▼
-Database (MySQL)
-```
+Driver starts trip      →  status: STARTED
+      │
+      ▼
+Driver completes trip   →  status: COMPLETED
+      │
+      ▼
+Payment recorded        →  status: SUCCESS
 
-Each layer has a single responsibility.
-
-- Controller → REST APIs
-- Service → Business Logic
-- Repository → Database Operations
-- Entity → Database Mapping
-- DTO → Request & Response Objects
-
----
-
-# 📂 Project Structure
-
-```
-src
-└── main
-    ├── java
-    │   └── com.ridebooking
-    │       ├── config
-    │       ├── controller
-    │       ├── dto
-    │       │   ├── request
-    │       │   └── response
-    │       ├── entity
-    │       ├── enums
-    │       ├── exception
-    │       ├── repository
-    │       ├── service
-    │       └── RideBookingSystemApplication.java
-    │
-    └── resources
-        └── application.properties
+(A BOOKED ride can instead be CANCELLED by the user before it's accepted.)
 ```
 
 ---
 
-# ⚙️ Tech Stack
+## 🏗️ Architecture
 
-## Backend
+The backend follows a standard layered architecture:
 
+```
+Controller  →  Service  →  Repository  →  Database (MySQL)
+```
+
+- **Controller** — REST endpoints, request validation
+- **Service** — business logic and rule enforcement
+- **Repository** — Spring Data JPA persistence
+- **Entity** — JPA-mapped domain objects
+- **DTO** — request/response payloads, kept separate from entities
+- **Security** — JWT filter + `SecurityConfig` wiring roles to routes
+- **Exception** — centralized `@RestControllerAdvice` error handling
+
+---
+
+## 📂 Project Structure
+
+```
+ride-booking-system/
+├── src/
+│   ├── main/java/com/ridebooking/
+│   │   ├── config/            # CorsConfig, SecurityConfig
+│   │   ├── controller/        # UserController, DriverController, RideController, PaymentController
+│   │   ├── dto/
+│   │   │   ├── request/       # driver/, ride/, user/, payement/
+│   │   │   └── response/      # auth/, driver/, ride/, user/, payement/
+│   │   ├── entity/            # User, Driver, Ride, Payment
+│   │   ├── enums/             # RideStatus, DriverStatus, VehicleType, PaymentMethod, PaymentStatus
+│   │   ├── exception/         # Custom exceptions + GlobalExceptionHandler
+│   │   ├── repository/        # Spring Data JPA repositories
+│   │   ├── security/          # JwtService, JwtAuthenticationFilter
+│   │   ├── service/           # Service interfaces
+│   │   │   └── impl/          # Service implementations
+│   │   └── RideBookingSystemApplication.java
+│   ├── main/resources/
+│   │   └── application.properties
+│   └── test/java/com/ridebooking/
+│       └── RideBookingSystemApplicationTests.java
+│
+├── ride-booking-frontend/
+│   ├── index.html              # Landing page
+│   ├── css/                    # global, auth, dashboard, user, driver styles
+│   ├── js/
+│   │   ├── api/                # api-client.js + user/driver/ride/payment API wrappers
+│   │   ├── auth/                # user & driver login/register/logout
+│   │   ├── user/                # booking flow, dashboard, ride history, profile, payment
+│   │   ├── driver/               # dashboard, available rides, earnings, ride history
+│   │   ├── utils/                # auth-guard, storage, ride-state, route-map, ui helpers
+│   │   └── config.js             # API_BASE_URL
+│   └── pages/
+│       ├── auth/{user,driver}/   # login & register pages
+│       ├── user/user-dashboard.html
+│       └── driver/driver-dashboard.html
+│
+├── pom.xml
+├── mvnw / mvnw.cmd
+└── README.md
+```
+
+---
+
+## ⚙️ Tech Stack
+
+**Backend**
 - Java 17
-- Spring Boot
-- Spring MVC
-- Spring Data JPA
-- Hibernate
-- Maven
-- Spring Security
-
-## Database
-
-- MySQL
-
-## API Testing
-
-- Postman
-
-## Build Tool
-
+- Spring Boot 3.5.15 (Web, Data JPA, Validation, Security)
+- Hibernate / Spring Data JPA
+- MySQL (`mysql-connector-j`)
+- JWT via `jjwt` 0.12.6
+- Lombok
 - Maven
 
----
-
-# 📋 Business Rules
-
-## User
-
-- A user cannot have more than one active ride.
-- A ride cannot be booked without a registered user.
-- A ride can only be cancelled before the driver accepts it.
+**Frontend**
+- HTML5, CSS3
+- Vanilla JavaScript (`fetch` API, no framework/build tool)
 
 ---
 
-## Driver
+## 🗄️ Data Model
 
-- A driver cannot accept multiple active rides.
-- Driver can go Offline only if there is no active ride.
-- Driver earnings are updated after ride completion.
-
----
-
-## Ride
-
-Ride Status Flow:
+**Entities:** `User`, `Driver`, `Ride`, `Payment`
 
 ```
-BOOKED
-   │
-   ▼
-ACCEPTED
-   │
-   ▼
-STARTED
-   │
-   ▼
-COMPLETED
+User  1 ──── * Ride * ──── 1 Driver
+                │
+                │ 1
+                ▼
+              Payment  (1:1 with Ride)
 ```
 
-Rules:
+- A `User` can have many `Ride`s; a `Ride` belongs to exactly one `User`.
+- A `Driver` can have many `Ride`s over time, but only one **active** ride at once (enforced in the service layer, not by the schema).
+- A `Ride` has at most one `Payment`.
 
-- Only BOOKED rides can be accepted.
-- Only ACCEPTED rides can be started.
-- Only STARTED rides can be completed.
-
----
-
-## Payment
-
-- Payment is allowed only after ride completion.
-- Duplicate payments are not allowed.
-- Payment amount must match ride fare.
+`spring.jpa.hibernate.ddl-auto=update` is set, so tables are created/updated automatically from the entities on startup — no manual schema or migration scripts are needed for local development.
 
 ---
 
-# 🗄️ Database
+## 📋 Key Business Rules
 
-Main Entities
+**User**
+- A user cannot have more than one ride in `BOOKED` / `ACCEPTED` / `STARTED` state at a time.
+- A ride can only be cancelled by the user who booked it, and only while it's still `BOOKED`.
 
-- User
-- Driver
-- Ride
-- Payment
+**Driver**
+- A driver is marked unavailable the instant they're auto-assigned to a ride (not when they accept), preventing double-assignment.
+- A driver becomes available again once the ride is completed or cancelled.
+- Only the driver assigned to a ride can accept, start, or complete it.
 
-Relationships
+**Ride status transitions**
+- `BOOKED → ACCEPTED → STARTED → COMPLETED` (linear, enforced server-side)
+- `BOOKED → CANCELLED` is the only alternate path
 
+**Payment**
+- A `PaymentRequest` can be submitted for any ride ID; the service layer is responsible for validating ride state and preventing duplicates.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- JDK 17+
+- Maven (or use the included `mvnw` / `mvnw.cmd` wrapper)
+- MySQL 8+ running locally (or reachable via the env vars below)
+- A modern browser for the frontend (no build tooling required)
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/sanjupeddaboina/ride-booking-system
+cd ride-booking-system
 ```
-User
- │
- └──────< Ride >────── Driver
-            │
-            │
-         Payment
-```
 
----
+### 2. Configure the database
+The app reads its DB connection from environment variables, falling back to local defaults if unset (`src/main/resources/application.properties`):
 
-# ✅ Implemented Features
+| Variable | Default | Purpose |
+|---|---|---|
+| `DB_URL` | `jdbc:mysql://localhost:3306/ridebooking_db` | JDBC connection string |
+| `DB_USERNAME` | `root` | MySQL username |
+| `DB_PASSWORD` | `root` | MySQL password |
+| `SERVER_PORT` | `8080` | Port the API listens on |
 
-✔ Layered Architecture
-
-✔ RESTful API Design
-
-✔ DTO Pattern
-
-✔ Constructor Dependency Injection
-
-✔ Global Exception Handling
-
-✔ Custom Exceptions
-
-✔ Input Validation
-
-✔ Business Rule Validation
-
-✔ Automatic Driver Assignment
-
-✔ Ride Lifecycle Management
-
-✔ Distance Based Fare Calculation
-
-✔ Payment Processing
-
-✔ Driver Earnings Calculation
-
-✔ Clean Project Structure
-
----
-
-# 🚧 Future Enhancements
-
-The following features are planned for future implementation:
-
-- Spring Security
-- JWT Authentication
-- Role-Based Authorization
-- BCrypt Password Encryption
-- GPS-Based Driver Tracking
-- Nearest Driver Matching Algorithm
-- Google Maps Integration
-- Live Driver Location Updates
-- WebSocket-Based Real-Time Ride Tracking
-- Push Notifications
-- Ride ETA Calculation
-- Redis Caching
-- Docker Deployment
-- Unit Testing
-- Integration Testing
-- CI/CD Pipeline
-- AWS Deployment
-
----
-
-# 🚀 Getting Started
-
-## Clone Repository
+Either export these before running, or just make sure a local MySQL instance matches the defaults and has a database named `ridebooking_db` (it will be created/updated automatically by Hibernate on first run — you don't need to create tables manually, though you may need to create the empty database itself depending on your MySQL setup).
 
 ```bash
-git clone https://github.com/sanjupeddaboina/Ride-Booking-System.git
+export DB_URL=jdbc:mysql://localhost:3306/ridebooking_db
+export DB_USERNAME=root
+export DB_PASSWORD=your_password
 ```
 
----
-
-## Navigate to Project
-
+### 3. Run the backend
 ```bash
-cd Ride-Booking-System
-```
+# Linux / macOS
+./mvnw spring-boot:run
 
----
-
-## Configure Database
-
-Update:
-
-```
-src/main/resources/application.properties
-```
-
-Example:
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/ride_booking
-spring.datasource.username=root
-spring.datasource.password=your_password
-```
-
----
-
-## Run Project
-
-Using Maven Wrapper
-
-Windows
-
-```bash
+# Windows
 mvnw.cmd spring-boot:run
 ```
+The API starts on `http://localhost:8080` by default.
 
-Linux / Mac
-
+### 4. Run the frontend
+The frontend is fully static — no build step. Just serve the `ride-booking-frontend/` folder and open it in a browser, e.g.:
 ```bash
-./mvnw spring-boot:run
+cd ride-booking-frontend
+python3 -m http.server 5500
+# then visit http://localhost:5500
 ```
+It talks to the API via `API_BASE_URL` in `ride-booking-frontend/js/config.js`, which is set to `http://localhost:8080/api/v1` — update this if your backend runs elsewhere.
+
+> The backend's CORS policy (`SecurityConfig` / `CorsConfig`) allows any `http://localhost:*` or `http://127.0.0.1:*` origin, so serving the frontend on any local port should work out of the box.
 
 ---
 
-# 👨‍💻 Author
+## 📡 API Reference
+
+Base URL: `http://localhost:8080/api/v1`
+
+All authenticated endpoints require a header: `Authorization: Bearer <token>`, where the token is obtained from a login response.
+
+### Auth & Users (`/users`)
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/users/register` | Public | Register a new rider |
+| POST | `/users/login` | Public | Log in, returns JWT |
+| GET | `/users/{userId}` | USER | Get user profile |
+| GET | `/users/{userId}/current` | USER | Get current active ride |
+| GET | `/users/{userId}/rides` | USER | Get ride history |
+
+### Drivers (`/drivers`)
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/drivers/register` | Public | Register a new driver |
+| POST | `/drivers/login` | Public | Log in, returns JWT |
+| GET | `/drivers/{driverId}` | DRIVER | Get driver profile |
+| PUT | `/drivers/{driverId}/status` | DRIVER | Set status to `ONLINE`/`OFFLINE` |
+| GET | `/drivers/{driverId}/current` | DRIVER | Get current active ride |
+| GET | `/drivers/{driverId}/pending` | DRIVER | Get newly-assigned, not-yet-accepted ride |
+| GET | `/drivers/{driverId}/rides` | DRIVER | Get ride history |
+| GET | `/drivers/{driverId}/earnings` | DRIVER | Get total earnings |
+
+### Rides (mounted under `/users` — see note below)
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/users/{userId}/rides/book` | USER | Book a ride (auto-assigns a driver) |
+| PUT | `/users/{rideId}/rides/accept` | DRIVER | Driver accepts an assigned ride |
+| PUT | `/users/{rideId}/rides/start` | DRIVER | Driver starts the trip |
+| PUT | `/users/{rideId}/rides/complete` | DRIVER | Driver completes the trip |
+| PUT | `/users/{rideId}/rides/cancel` | USER | User cancels a `BOOKED` ride |
+
+### Payments (`/payments`)
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/payments` | Authenticated | Record a payment for a completed ride |
+| GET | `/payments/rides/{rideId}` | USER | Get payment details for a ride |
+
+
+### Fare calculation
+Fare = base fare + (per-km rate × distance), by vehicle type:
+
+| Vehicle | Base Fare | Per KM |
+|---|---|---|
+| BIKE | ₹50 | ₹8 |
+| AUTO | ₹70 | ₹12 |
+| MINI | ₹100 | ₹16 |
+| SEDAN | ₹150 | ₹20 |
+
+## 🧪 Testing
+
+API behavior has been manually verified with Postman, covering CRUD operations, complete ride workflows, input validation, exception handling, and edge cases.
+
+---
+
+## 🚧 Future Enhancements
+
+- GPS-based driver tracking and nearest-driver matching
+- Google Maps integration for routing and ETA
+- WebSocket-based real-time ride tracking
+- Push notifications
+- Redis caching
+- Docker deployment and CI/CD pipeline
+- Automated unit and integration test coverage
+
+---
+
+## 👨‍💻 Author
 
 **Sanjay Kumar Peddaboina**
 
----
-
-## ⭐ If you found this project useful, consider giving it a Star!
-This project is developed for **learning purposes**.
+This project was built as a learning exercise in enterprise-style backend development (layered architecture, JWT auth/RBAC, DTOs, global exception handling) paired with a plain-JS frontend consuming the API end to end.
