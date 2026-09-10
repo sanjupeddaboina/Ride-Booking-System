@@ -243,15 +243,7 @@ mvnw.cmd spring-boot:run
 The API starts on `http://localhost:8080` by default.
 
 ### 4. Run the frontend
-The frontend is fully static — no build step. Just serve the `ride-booking-frontend/` folder and open it in a browser, e.g.:
-```bash
-cd ride-booking-frontend
-python3 -m http.server 5500
-# then visit http://localhost:5500
-```
-It talks to the API via `API_BASE_URL` in `ride-booking-frontend/js/config.js`, which is set to `http://localhost:8080/api/v1` — update this if your backend runs elsewhere.
-
-> The backend's CORS policy (`SecurityConfig` / `CorsConfig`) allows any `http://localhost:*` or `http://127.0.0.1:*` origin, so serving the frontend on any local port should work out of the box.
+Go through the `ride-booking-frontend/` and open the `index.html` file to use the application. 
 
 ---
 
