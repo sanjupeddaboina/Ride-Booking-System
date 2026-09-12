@@ -321,5 +321,3 @@ API behavior has been manually verified with Postman, covering CRUD operations, 
 ## 👨‍💻 Author
 
 **Sanjay Kumar Peddaboina**
-
-This project was built as a learning exercise in enterprise-style backend development (layered architecture, JWT auth/RBAC, DTOs, global exception handling) paired with a plain-JS frontend consuming the API end to end.
